@@ -1,0 +1,89 @@
+---
+
+- name: ASIR-DEPLOY | Ensure asir-deploy group
+  group:
+    name: "{{ asir-deploy_group }}"
+    system: yes
+    state: present
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Ensure asir-deploy user
+  user:
+    name: "{{ asir-deploy_user }}"
+    group: "{{ asir-deploy_group }}"
+    system: yes
+    shell: "{{ asir-deploy_user_shell }}"
+    createhome: no
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Ensure skeleton paths
+  file:
+    dest: "{{ item }}"
+    owner: "{{ asir-deploy_user }}"
+    group: "{{ asir-deploy_group }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "{{ asir-deploy_skeleton_paths }}"
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Ensure skeleton log paths
+  file:
+    dest: "{{ asir-deploy_log_path }}"
+    owner: "{{ asir-deploy_user }}"
+    group: "{{ asir-deploy_group }}"
+    mode: 0755
+    state: directory
+  when: asir-deploy_log_file is defined
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Check asir-deploy version
+  command: "{{ asir-deploy_exec_name }} --version"
+  register: asir-deploy_check
+  changed_when: false
+  ignore_errors: true
+  check_mode: no
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Download package
+  get_url:
+    url: "{{ asir-deploy_url }}"
+    dest: "{{ asir-deploy_package_path }}"
+  when: asir-deploy_force_reinstall or asir-deploy_check is failed or asir-deploy_version not in asir-deploy_check.stderr
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Extract downloaded package
+  unarchive:
+    src: "{{ asir-deploy_package_path }}"
+    dest: "{{ asir-deploy_download_path }}"
+    remote_src: True
+  when: asir-deploy_force_reinstall or asir-deploy_check is failed or asir-deploy_version  not in asir-deploy_check.stderr
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Copy binary
+  copy:
+    src: "{{ asir-deploy_src_bin }}"
+    dest: "{{ asir-deploy_bin_path }}/{{ asir-deploy_exec_name }}"
+    owner: "{{ asir-deploy_user }}"
+    group: "{{ asir-deploy_group }}"
+    remote_src: True
+    mode: 0755
+  when: asir-deploy_force_reinstall or asir-deploy_check is failed or asir-deploy_version not in asir-deploy_check.stderr
+  tags:
+    - asir-deploy_install
+
+- name: ASIR-DEPLOY | Link binary
+  file:
+    src: "{{ asir-deploy_bin_path }}/{{ asir-deploy_exec_name }}"
+    dest: "/usr/bin/{{ asir-deploy_exec_name }}"
+    state: link
+  when: asir-deploy_force_reinstall or asir-deploy_check is failed or asir-deploy_version not in asir-deploy_check.stderr
+  tags:
+    - asir-deploy_install

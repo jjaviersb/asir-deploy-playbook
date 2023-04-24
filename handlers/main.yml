@@ -1,0 +1,7 @@
+---
+
+- name: restart asir-deploy
+  systemd:
+    name: asir-deploy
+    state: restarted
+  when: asir-deploy_service_state != 'stopped'

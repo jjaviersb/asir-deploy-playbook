@@ -1,0 +1,5 @@
+---
+- name: Converge
+  hosts: asir-deploy_group
+  roles:
+    - role: asir-deploy_role
