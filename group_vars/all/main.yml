@@ -59,3 +59,80 @@ asir-deploy_options:
   - "flag2 {{ asir-deploy_flag2_value }}"
 
 asir-deploy_private_tmp: true
+
+asir-deploy-packages:
+  # general
+  - ubuntu-restricted-extras
+  - rsync
+  - build-essential
+  # utils
+  - unrar
+  - rar
+  - cifs-utils
+  # editors
+  - nano
+  - gedit
+  - vim
+  # internet
+  - firefox
+  # security
+  - ssh
+  # network
+  - filezilla
+  - whois
+  - smbclient
+  - telnet
+  - exfat-utils
+  - nfs-common
+  - net-tools
+  - iputils-ping
+  - traceroute
+  - dnsutils
+  - nmap
+  - libwww-perl
+  # ofimatic
+  - inkscape
+  - pdfshuffler
+  - krita
+  - libreoffice
+  - libreoffice-l10n-es
+  - mythes-es
+  - hunspell-es
+  # image and sound
+  - kazam
+  - audacity
+  - obs-studio
+  - openshot
+  - kolourpaint4
+  - vlc
+  - blender
+  - pinta
+  - imagemagick
+  - darktable
+  - gimp
+  - openshot openshot-doc
+  - kdenlive
+  - shutter
+  # screen brightness
+  - redshift redshift-gtk
+  # hardware
+  - i2c-tools
+  - hardinfo
+  - lshw
+  - lshw lshw-gtk
+  - smartmontools
+  - dosbox
+  - xournal
+  - kinfocenter
+  - lm-sensors
+  - sensors-applet
+  - isomaster
+  - bless
+  # xor
+  - apache2-utils
+  - apache2-dev
+  - curl
+  - lynx
+  - wget
+
+asir-deploy-repositories:
