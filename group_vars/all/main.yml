@@ -1,64 +1,8 @@
 ---
-
 ## General
-# Version
-asir-deploy_version: 1.0.0
-asir-deploy_release_system: linux_amd64
 
-# Package URL
-asir-deploy_release_name: "exampleapplication_{{ asir-deploy_version }}_{{ asir-deploy_release_system }}"
-asir-deploy_package: "{{ asir-deploy_release_name }}.tar.gz"
-asir-deploy_url: "https://github.com/someuser/somerepo/releases/download/v{{ asir-deploy_version }}/{{ asir-deploy_package }}"
-
-# Package paths
-asir-deploy_download_path: /usr/src
-asir-deploy_package_path: "{{ asir-deploy_download_path }}/{{ asir-deploy_package }}"
-asir-deploy_src_bin: "{{ asir-deploy_download_path }}/{{ asir-deploy_release_name }}/bin/{{ asir-deploy_exec_name }}"
-
-# Set true to force the download and installation of the binary
-asir-deploy_force_reinstall: false
-
-# Installation path
-asir-deploy_root_path: /opt/asir-deploy
-asir-deploy_bin_path: "{{ asir-deploy_root_path }}/bin"
-asir-deploy_skeleton_paths:
-  - "{{ asir-deploy_bin_path }}"
-asir-deploy_exec_name: asir-deploy
-
-## Service options
-# Documentation
-asir-deploy_documentation_link: ""
-
-# Owner
-asir-deploy_user: exampleuser
-asir-deploy_group: examplegroup
-asir-deploy_user_shell: /usr/sbin/nologin
-
-# Maximum number of files limit
-asir-deploy_max_files: 32768
-
-# Start on boot
-asir-deploy_service_enabled: True
-# Current state: started, stopped
-asir-deploy_service_state: started
-
-# Logs
-# If wanted to output the logs to a file define the following variable
-# More information at https://www.freedesktop.org/software/systemd/man/systemd.exec.html#StandardOutput=
-# asir-deploy_log_path: /var/log
-# asir-deploy_log_file: "{{ asir-deploy_log_path }}/asir-deploy.log"
-asir-deploy_log_output: "{% if asir-deploy_log_file is defined %} file:{{ asir-deploy_log_file }} {% else %} journal {% endif %}"
-
-# Flags
-asir-deploy_port: # the port exposed by the service goes here 
-asir-deploy_flag1_value: example_value_1
-asir-deploy_flag2_value: example_value_2
-asir-deploy_options:  
-  - "port {{ asir-deploy_port }}"
-  - "flag1 {{ asir-deploy_flag1_value }}"
-  - "flag2 {{ asir-deploy_flag2_value }}"
-
-asir-deploy_private_tmp: true
+asir_user: alumno
+asir_root_user: profesor
 
 asir_deploy_packages:
   # general

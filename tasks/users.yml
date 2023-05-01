@@ -1,0 +1,17 @@
+---
+
+- name: "Create user {{ asir_user }}"
+  user:
+    name: "{{ asir_user }}"
+    password: "{{ password_user | password_hash('sha512') }}"
+    createhome: yes
+    shell: /bin/bash
+
+- name: "Create user {{ asir_root_user }}"
+  user:
+    name: "{{ asir_root_user }}"
+    groups: sudo
+    password: "{{ password_root_user | password_hash('sha512') }}"
+    createhome: yes
+    shell: /bin/bash
+

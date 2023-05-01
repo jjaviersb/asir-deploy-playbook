@@ -1,5 +1,12 @@
 ---
 
+- name: Create users and deleted users
+  hosts: asir
+  become: True
+  tasks:
+    - include: tasks/users.yml
+      tags: users
+
 - name: INSTALL
   hosts: all
   become: true
