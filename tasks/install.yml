@@ -1,0 +1,11 @@
+---
+
+- name: Install Packages | Update APT list
+  apt:
+    update_cache: yes
+- name: Install Packages | Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ asir_deploy_packages }}"

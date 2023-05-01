@@ -60,7 +60,7 @@ asir-deploy_options:
 
 asir-deploy_private_tmp: true
 
-asir-deploy-packages:
+asir_deploy_packages:
   # general
   - ubuntu-restricted-extras
   - rsync

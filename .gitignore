@@ -9,6 +9,7 @@ roles/
 *.iml
 .idea
 .project
-
+comandos.txt
 *.pyc
 **/.vscode
+.*

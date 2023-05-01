@@ -1,2 +1,9 @@
 ---
 
+- name: INSTALL
+  hosts: all
+  become: true
+  tasks: 
+    - include: tasks/install.yml
+      tags:
+        - install
