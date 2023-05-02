@@ -1,16 +1,14 @@
 ---
-
-- name: Create users and deleted users
-  hosts: asir
-  become: True
+- hosts: asir
   tasks:
-    - include: tasks/users.yml
-      tags: users
+    - name: Create users and deleted users
+      become: True
+      import_tasks: tasks/users.yml
+      tags: 
+        - users
 
-- name: INSTALL
-  hosts: all
-  become: true
-  tasks: 
-    - include: tasks/install.yml
+    - name: INSTALL
+      become: true 
+      import_tasks: tasks/install.yml
       tags:
         - install

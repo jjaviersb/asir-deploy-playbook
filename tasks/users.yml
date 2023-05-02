@@ -4,6 +4,7 @@
   user:
     name: "{{ asir_user }}"
     password: "{{ password_user | password_hash('sha512') }}"
+    state: present
     createhome: yes
     shell: /bin/bash
 
@@ -12,6 +13,7 @@
     name: "{{ asir_root_user }}"
     groups: sudo
     password: "{{ password_root_user | password_hash('sha512') }}"
+    state: present
     createhome: yes
     shell: /bin/bash
 

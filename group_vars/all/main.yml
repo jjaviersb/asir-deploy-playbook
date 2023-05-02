@@ -1,6 +1,8 @@
 ---
 ## General
 
+ansible_user: javiersb
+
 asir_user: alumno
 asir_root_user: profesor
 
