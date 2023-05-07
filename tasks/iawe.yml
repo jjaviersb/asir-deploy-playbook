@@ -1,0 +1,50 @@
+---
+
+- name: IAWE | Create Directory
+  file:
+    path: "{{ path_iawe_directory }}"
+    state: directory
+    owner: "{{ asir_user }}"
+    group: "{{ asir_user }}"
+    mode: 0755
+
+- name: IAWE | Build Docker Image
+  shell: docker build -t iawe_image .
+  args:
+    chdir: "{{ path_iawe_directory }}"
+
+- name: IAWE | Create Docker network
+  docker_network:
+    name: iawe_net
+
+- name: IAWE | Run MySQL container
+  docker_container:
+    name: iawe_db
+    network_mode: iawe_net
+    detach: yes
+    env:
+      MYSQL_ROOT_PASSWORD: root
+    image: mysql
+
+- name: IAWE | Run PhpMyAdmin container
+  docker_container:
+    name: phpmyadmin
+    network_mode: iawe_net
+    detach: yes
+    env:
+      PMA_HOST: iawe_db
+    image: phpmyadmin
+    ports:
+      - "8080:80"
+
+- name: IAWE | Run iawe_php container
+  docker_container:
+    name: iawe_php
+    network_mode: iawe_net
+    detach: yes
+    image: iawe_image
+    volumes:
+      - "{{ path_iawe_docker_volume }}"
+    ports:
+      - "8000:80"
+    restart: yes

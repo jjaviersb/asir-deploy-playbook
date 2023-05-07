@@ -1,11 +1,26 @@
 ---
 
-- name: Install Packages | Update APT list
+- name: Install Packages | Add repositories
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ asir_add_repositories }}"
+
+- name: Install Packages | Update apt list
   apt:
     update_cache: yes
-- name: Install Packages | Install packages
+
+- name: Install Packages | Install apt packages
   apt:
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ asir_deploy_packages }}"
+    - "{{ asir_apt_packages }}"
+
+- name: Install Packages | Install snap packages
+  snap:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ asir_snap_packages }}"

@@ -1,14 +1,37 @@
 ---
 - hosts: asir
   tasks:
-    - name: Create users and deleted users
+    - name: Asir Deploy | Create Users
       become: True
       import_tasks: tasks/users.yml
       tags: 
         - users
 
-    - name: INSTALL
+    - name: Asir Deploy | Install Packages
       become: true 
       import_tasks: tasks/install.yml
       tags:
         - install
+      
+    - name: Asir Deploy | VMs
+      become: true 
+      import_tasks: tasks/vms.yml
+      tags:
+        - vms
+
+    - name: Asir Deploy | Copy Dockerfile
+      template:
+        src: "templates/dockerfile.bin.j2"
+        dest: "{{ path_iawe_directory }}/dockerfile.bin"
+    
+    - name: Asir Deploy | IAWE
+      become: true 
+      import_tasks: tasks/iawe.yml
+      tags:
+        - iawe
+    
+    - name: Asir Deploy | BBDD
+      become: true 
+      import_tasks: tasks/bbdd.yml
+      tags:
+        - bbdd

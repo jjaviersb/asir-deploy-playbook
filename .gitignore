@@ -13,3 +13,4 @@ comandos.txt
 *.pyc
 **/.vscode
 .*
+ejecutar.sh*

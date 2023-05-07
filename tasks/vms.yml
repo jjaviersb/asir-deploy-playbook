@@ -1,0 +1,18 @@
+---
+
+- name: VMs | Create Directory
+  file:
+    path: "{{ path_images_iso }}"
+    state: directory
+    owner: "{{ asir_user }}"
+    group: "{{ asir_user }}"
+    mode: 0755
+
+- name: VMs | Download Images ISO
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.path }}"
+  with_items:
+    - "{{ images_iso }}"
+
+

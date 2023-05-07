@@ -9,73 +9,32 @@ This role has been generated using the [cookiecutter](https://github.com/cookiec
 
 - [Getting Started](#getting-started)
 	- [Prerequisities](#prerequisities)
-	- [Installing](#installing)
 - [Usage](#usage)
-- [Testing](#testing)
-- [Built With](#built-with)
-- [Versioning](#versioning)
+- [Install dependencies](#install-dependencies)
 - [Authors](#authors)
 - [License](#license)
 
 ## Getting Started
-These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install Asir-Deploy in a Debian system.
+These instructions will get you a copy the playbook in a Debian system.
 
 ### Prerequisities
 
 Ansible 2.14.5 version installed.
 
-Molecule 5.0.0 version installed.
-
-For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Docker](https://www.docker.com/) as driver and [Goss](https://github.com/goss-org/goss) as verifier.
-
-### Installing
-
-Create or add to your roles dependency file (e.g requirements.yml):
-
-```
-#Example
-- src: asir-deploy_role
-  version: 1.0.0
-  name: asir-deploy_playbook
-```
-
-Install the roles with ansible command:
-
-```
-ansible-galaxy install -p roles -r requirements.yml -f
-```
-
 ## Usage
 
 Look to the [defaults](groups_vars/main.yml) properties file to see the possible configuration properties, it is very likely that you will not need to override any variables.
 
-
-## Testing
-
-### Install dependencies
+## Install dependencies
 
 ```sh
 $ pipenv sync
-```
-
-For more information read the [pipenv docs](ipenv-fork.readthedocs.io/en/latest/).
-
-### Testing
-
-```sh
-$ pipenv run molecule test 
 ```
 
 ## Built With
 
 ![Ansible](https://img.shields.io/badge/ansible-5.2.0-green.svg)
 ![Molecule](https://img.shields.io/badge/molecule-3.4.0-green.svg)
-
-## Versioning
-
-For the versions available, see the [tags on this repository](https://github.com/idealista/asir-deploy_role/tags).
-
-Additionaly you can see what change in each version in the [CHANGELOG.md](CHANGELOG.md) file.
 
 ## Authors
 

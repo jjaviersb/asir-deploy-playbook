@@ -6,79 +6,29 @@ ansible_user: javiersb
 asir_user: alumno
 asir_root_user: profesor
 
-asir_deploy_packages:
-  # general
-  - ubuntu-restricted-extras
-  - rsync
-  - build-essential
-  # utils
-  - unrar
-  - rar
-  - cifs-utils
-  # editors
-  - nano
-  - gedit
-  - vim
-  # internet
-  - firefox
-  # security
-  - ssh
-  # network
-  - filezilla
-  - whois
-  - smbclient
-  - telnet
-  - exfat-utils
-  - nfs-common
-  - net-tools
-  - iputils-ping
-  - traceroute
-  - dnsutils
-  - nmap
-  - libwww-perl
-  # ofimatic
-  - inkscape
-  - pdfshuffler
-  - krita
-  - libreoffice
-  - libreoffice-l10n-es
-  - mythes-es
-  - hunspell-es
-  # image and sound
-  - kazam
-  - audacity
-  - obs-studio
-  - openshot
-  - kolourpaint4
-  - vlc
-  - blender
-  - pinta
-  - imagemagick
-  - darktable
-  - gimp
-  - openshot openshot-doc
-  - kdenlive
-  - shutter
-  # screen brightness
-  - redshift redshift-gtk
-  # hardware
-  - i2c-tools
-  - hardinfo
-  - lshw
-  - lshw lshw-gtk
-  - smartmontools
-  - dosbox
-  - xournal
-  - kinfocenter
-  - lm-sensors
-  - sensors-applet
-  - isomaster
-  - bless
-  # xor
-  - apache2-utils
-  - apache2-dev
-  - curl
-  - lynx
-  - wget
+## VMs
 
-asir-deploy-repositories:
+path_images_iso: /home/{{ asir_user }}/imagesISO
+vm_type_os: Ubuntu_64
+url_ubuntu_server: http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso # v22.04
+url_linux_mint: https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-mate-64bit.iso # v21
+  # Another options ( Spain Servers Only )
+  # https://ftp.cixug.es/mint/stable/21/linuxmint-21-mate-64bit.iso
+  # https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-cinnamon-64bit.iso
+  # https://ftp.cixug.es/mint/stable/21/linuxmint-21-cinnamon-64bit.iso
+images_iso:
+  - {name: ubuntuserver-22.04.iso, url: "{{ url_ubuntu_server }}", path: "{{ path_images_iso }}/{{ name }}"}
+  - {name: linuxmint-21.iso, url: "{{ url_linux_mint }}", path: "{{ path_images_iso }}/{{ name }}"}
+
+## IAWE
+
+path_iawe_directory: "/home/{{ asir_user }}/iawe"
+path_iawe_docker_volume: "{{ path_iawe_directory }}:/var/www/html"
+
+## BBDD
+
+bbdd_name_container: fernandorodriguezmoron/mysql
+bbdd_tag_container: latest
+bbdd_image_container: "{{ bbdd_name_container }}:{{ bbdd_tag_container }}"
+
+bbdd_vm_name: bbdd_ubuntuserver
