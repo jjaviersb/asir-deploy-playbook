@@ -30,8 +30,6 @@
     env:
       MYSQL_ROOT_PASSWORD: root
     image: mysql
-    ports:
-      - "3307:3307" # conflicts
 
 - name: IAWE | Run PhpMyAdmin container
   docker_container:

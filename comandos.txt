@@ -1,0 +1,71 @@
+##Comentarios, comandos
+
+#Iniciar host remotos
+    $ visudo 
+    #includedir /etc/sudoers.d
+    ansible      ALL=(ALL)       NOPASSWD: ALL
+
+    ## Introducir clave ssh al host remoto
+    ssh-copy-id javiersb@192.168.1.15
+    Habilitar conexion remota con publick key -> /etc/ssh/sshd_config PubkeyAuthentication yes
+    Reiniciar ssh
+
+
+# Archivo ansible.cfg muy importante
+
+-errores:
+    pdfshuffler
+    exfat-utils
+    openshot
+    kolourpaint4
+    openshot openshot-doc
+    redshift redshift-gtk
+    lshw lshw-gtk
+
+## Creacion tasks user
+encriptamos en vault las passwords
+# no añadir group al crear user, se crea solo
+
+##errores al crear usuarios
+    no añadir encriptacion a las passwords, (linux no sabia detectarlas o yks)
+    al añadir los hash, no borrar las carpetas home y habia errores con los .bashrc o .bash_profile o asi que habian el las carpetas de los users
+
+# pasar passwd (al instalar cosas)
+    ansible.cfg -> ask_become_pass
+    a traves de var en vault - become_pass: "{{ admin_pass }}"
+
+# url españa iso LINUXMINT
+    # cinnamon
+    https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-cinnamon-64bit.iso
+    https://ftp.cixug.es/mint/stable/21/linuxmint-21-cinnamon-64bit.iso
+    # mate
+    https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-mate-64bit.iso
+    https://ftp.cixug.es/mint/stable/21/linuxmint-21-mate-64bit.iso
+
+# url download iso ubuntu server
+    http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso
+
+# error vboxmanage
+ansible-galaxy collection install community.general
+
+- name: BBDD | Create VirtualBox VM
+  vboxmanage:
+    name: "{{ bbdd_vm_name }}"
+    ostype: "{{ vm_type_os }}"
+    state: poweredoff
+    register: result
+
+- name: BBDD | Attach ISO to VirtualBox VM
+  vboxmanage:
+    name: "{{ bbdd_vm_name }}"
+    storagectl: SATA
+    port: 0
+    device: 0
+    type: dvddrive
+    medium: "{{ images_iso[0].path }}" # 0 us22.04 // 1 lm21
+  when: result.changed or result.present
+
+# error install snapd
+# error install mysql-workbench
+# error al crear profesor -- por si esta ya creado cambia la pass
+# los paquetes snap no se ven en la ig
