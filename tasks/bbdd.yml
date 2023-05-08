@@ -3,7 +3,9 @@
 - name: BBDD | Pull MySQL Docker image
   docker_image:
     name: "{{ bbdd_name_container }}"
-    tag: "{{ bbdd_tag_container }}"
+    repository: "{{ bbdd_image_container }}"
+    source: pull
+    #tag: "{{ bbdd_tag_container }}"
 
 - name: BBDD | Init Container MySQL
   docker_container:
@@ -11,5 +13,5 @@
     image: "{{ bbdd_image_container }}"
     ports:
       - "3306:3306"
-    environment:
+    env:
       MYSQL_ROOT_PASSWORD: root # it would be advisable to use an encrypted variable

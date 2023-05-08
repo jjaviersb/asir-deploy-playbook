@@ -8,6 +8,11 @@
     group: "{{ asir_user }}"
     mode: 0755
 
+- name: IAWE | Copy Dockerfile
+  template:
+    src: "templates/Dockerfile.bin.j2"
+    dest: "{{ path_iawe_directory }}/Dockerfile"
+
 - name: IAWE | Build Docker Image
   shell: docker build -t iawe_image .
   args:
@@ -25,6 +30,8 @@
     env:
       MYSQL_ROOT_PASSWORD: root
     image: mysql
+    ports:
+      - "3307:3307" # conflicts
 
 - name: IAWE | Run PhpMyAdmin container
   docker_container:

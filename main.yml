@@ -18,12 +18,13 @@
       import_tasks: tasks/vms.yml
       tags:
         - vms
-
-    - name: Asir Deploy | Copy Dockerfile
-      template:
-        src: "templates/dockerfile.bin.j2"
-        dest: "{{ path_iawe_directory }}/dockerfile.bin"
     
+    - name: Asir Deploy | Docker
+      become: true 
+      import_tasks: tasks/docker.yml
+      tags:
+        - docker
+
     - name: Asir Deploy | IAWE
       become: true 
       import_tasks: tasks/iawe.yml

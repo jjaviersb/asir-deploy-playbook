@@ -11,14 +11,18 @@ asir_root_user: profesor
 path_images_iso: /home/{{ asir_user }}/imagesISO
 vm_type_os: Ubuntu_64
 url_ubuntu_server: http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso # v22.04
-url_linux_mint: https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-mate-64bit.iso # v21
+url_linux_mint: https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso # v21.1
   # Another options ( Spain Servers Only )
+  # linux mint v21
   # https://ftp.cixug.es/mint/stable/21/linuxmint-21-mate-64bit.iso
   # https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-cinnamon-64bit.iso
   # https://ftp.cixug.es/mint/stable/21/linuxmint-21-cinnamon-64bit.iso
+  # https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-mate-64bit.iso
+  # https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso
+  # https://mirror.crexio.com/linuxmint/isos/stable/21.1/linuxmint-21.1-cinnamon-64bit.iso
 images_iso:
-  - {name: ubuntuserver-22.04.iso, url: "{{ url_ubuntu_server }}", path: "{{ path_images_iso }}/{{ name }}"}
-  - {name: linuxmint-21.iso, url: "{{ url_linux_mint }}", path: "{{ path_images_iso }}/{{ name }}"}
+  - {name: ubuntuserver-22.04.iso, url: "{{ url_ubuntu_server }}", path: "{{ path_images_iso }}/ubuntuserver-22.04.iso"}
+  - {name: linuxmint-21.1.iso, url: "{{ url_linux_mint }}", path: "{{ path_images_iso }}/linuxmint-21.1.iso"}
 
 ## IAWE
 

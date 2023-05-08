@@ -1,0 +1,24 @@
+---
+
+- name: Docker | Add Docker GPG Key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
+
+- name: Docker | Add Docker Repository
+  shell: echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+- name: Docker | Update APT List
+  apt:
+    update_cache: yes
+
+- name: Docker | Install Docker
+  apt:
+    name: 
+      - docker-ce
+      - docker-compose
+    state: present
+
+- name: Docker | Add User to Docker Group
+  user:
+    name: "{{ asir_user }}"
+    groups: docker
+    append: yes

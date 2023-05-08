@@ -5,7 +5,11 @@ asir_apt_packages:
   - ubuntu-restricted-extras
   - rsync
   - build-essential
-  - snapd
+  - apt-transport-https
+  - ca-certificates
+  - software-properties-common
+  - gnupg
+  #- snapd
   # utils
   - unrar
   - rar
@@ -23,7 +27,6 @@ asir_apt_packages:
   - whois
   - smbclient
   - telnet
-  - exfat-utils
   - nfs-common
   - net-tools
   - iputils-ping
@@ -33,7 +36,6 @@ asir_apt_packages:
   - libwww-perl
   # ofimatic
   - inkscape
-  - pdfshuffler
   - krita
   - libreoffice
   - libreoffice-l10n-es
@@ -43,24 +45,18 @@ asir_apt_packages:
   - kazam
   - audacity
   - obs-studio
-  - openshot
-  - kolourpaint4
   - vlc
   - blender
   - pinta
   - imagemagick
   - darktable
   - gimp
-  - openshot openshot-doc
   - kdenlive
   - shutter
-  # screen brightness
-  - redshift redshift-gtk
   # hardware
   - i2c-tools
   - hardinfo
   - lshw
-  - lshw lshw-gtk
   - smartmontools
   - dosbox
   - xournal
@@ -76,7 +72,7 @@ asir_apt_packages:
   - lynx
   - wget
   # programs
-  - mysql-workbench
+  #- mysql-workbench
   - docker
   - virtualbox
 
