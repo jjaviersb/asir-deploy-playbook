@@ -1,9 +1,9 @@
-# Asir-Deploy Ansible role
+# Asir-Deploy Ansible Playbook
 ![Logo](logo.gif)
 
 
-This ansible role installs Asir-Deploy in a Linux Mint environment. It has been tested for the following Linux Mint versions:
-* Linux Mint 21
+This ansible playbook installs Asir-Deploy in a Linux Mint environment. It has been tested for the following Linux Mint versions:
+* Linux Mint 21 / 21.1
 
 This role has been generated using the [cookiecutter](https://github.com/cookiecutter/cookiecutter) tool, you can generate a similar role that fits your needs using the this [cookiecutter template](https://github.com/idealista/cookiecutter-ansible-role).
 
