@@ -1,19 +1,26 @@
 ---
 
-- name: Install Packages | Update apt list
+- name: Install Packages | Update APT list
   apt:
     update_cache: yes
 
-- name: Install Packages | Install apt packages
+- name: Install Packages | Remove lock file SNAP 
+  file:
+    path: /etc/apt/preferences.d/nosnap.pref
+    state: absent
+
+- name: Install Packages | Install APT packages
   apt:
     name: "{{ item }}"
     state: present
   with_items:
     - "{{ asir_apt_packages }}"
 
-#- name: Install Packages | Install snap packages
-#  snap:
-#    name: "{{ item }}"
-#    state: present
-#  with_items:
-#    - "{{ asir_snap_packages }}"
+- name: Install Packages | Install SNAP packages
+  snap:
+    name: "{{ item }}"
+    classic: true
+    state: present
+  with_items:
+    - "{{ asir_snap_packages }}"
+  when: asir_snap_packages is defined

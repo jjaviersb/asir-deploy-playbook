@@ -2,6 +2,7 @@
 
 asir_apt_packages:
   # general
+  - snapd
   - ubuntu-restricted-extras
   - rsync
   - build-essential
@@ -9,7 +10,6 @@ asir_apt_packages:
   - ca-certificates
   - software-properties-common
   - gnupg
-  #- snapd
   # utils
   - unrar
   - rar
@@ -72,12 +72,9 @@ asir_apt_packages:
   - lynx
   - wget
   # programs
-  #- mysql-workbench
   - docker
   - virtualbox
 
 asir_snap_packages:
   - mysql-workbench-community
-
-asir_add_repositories:
-  - "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - code
