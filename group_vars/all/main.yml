@@ -9,6 +9,7 @@ asir_root_user: profesor
 ## VMs
 
 path_images_iso: /home/{{ asir_user }}/imagesISO
+path_custom_images: 
 vm_type_os: Ubuntu_64
 url_ubuntu_server: http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso # v22.04
 url_linux_mint: https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso # v21.1
@@ -28,6 +29,10 @@ images_iso:
 
 path_iawe_directory: "/home/{{ asir_user }}/iawe"
 path_iawe_docker_volume: "{{ path_iawe_directory }}:/var/www/html"
+name_iawe_image: iawe_image
+name_iawe_container: iawe_php # Container with Apache and PHP
+name_iawe_network: iawe_net
+name_iawe_db: iawe_db
 
 ## BBDD
 

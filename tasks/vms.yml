@@ -15,4 +15,10 @@
   with_items:
     - "{{ images_iso }}"
 
+- name: VMs | Copy custom images
+  template:
+    src: "templates/{{ item }}"
+    dest: "/path/to/destination/{{ item }}"
+  with_items: "{{ path_custom_images }}"
+  when: path_custom_images is defined
 

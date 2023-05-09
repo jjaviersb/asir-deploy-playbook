@@ -1,5 +1,17 @@
 ---
 
+- name: Check if user {{ asir_user }} exists
+  become: true
+  ignore_errors: true
+  command: id "{{ asir_user }}"
+  register: result_asir_user
+
+- name: Check if user {{ asir_root_user }} exists
+  become: true
+  ignore_errors: true
+  command: id "{{ asir_root_user }}"
+  register: result_asir_root_user
+
 - name: "Create user {{ asir_user }}"
   user:
     name: "{{ asir_user }}"
@@ -7,6 +19,7 @@
     state: present
     createhome: yes
     shell: /bin/bash
+  when: result_asir_user.rc != 0
 
 - name: "Create user {{ asir_root_user }}"
   user:
@@ -16,4 +29,5 @@
     state: present
     createhome: yes
     shell: /bin/bash
+  when: result_asir_root_user.rc != 0
 

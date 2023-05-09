@@ -13,19 +13,26 @@
     src: "templates/Dockerfile.bin.j2"
     dest: "{{ path_iawe_directory }}/Dockerfile"
 
+- name: Check if IAWE Docker Image exists
+  docker_image_info:
+    name: "{{ name_iawe_image }}"
+  register: iawe_image_info
+
 - name: IAWE | Build Docker Image
-  shell: docker build -t iawe_image .
+  shell: "docker build -t {{ name_iawe_image }} ."
   args:
     chdir: "{{ path_iawe_directory }}"
+  when: not iawe_image_info.exists
 
 - name: IAWE | Create Docker network
   docker_network:
-    name: iawe_net
+    name: "{{ name_iawe_network }}"
 
 - name: IAWE | Run MySQL container
   docker_container:
-    name: iawe_db
-    network_mode: iawe_net
+    name: "{{ name_iawe_db }}"
+    state: present
+    network_mode: "{{ name_iawe_network }}"
     detach: yes
     env:
       MYSQL_ROOT_PASSWORD: root
@@ -34,20 +41,22 @@
 - name: IAWE | Run PhpMyAdmin container
   docker_container:
     name: phpmyadmin
-    network_mode: iawe_net
+    state: present
+    network_mode: "{{ name_iawe_network }}"
     detach: yes
     env:
-      PMA_HOST: iawe_db
+      PMA_HOST: "{{ name_iawe_db }}"
     image: phpmyadmin
     ports:
       - "8080:80"
 
-- name: IAWE | Run iawe_php container
+- name: IAWE | Run IAWE container
   docker_container:
-    name: iawe_php
-    network_mode: iawe_net
+    name: "{{ name_iawe_container }}"
+    state: present
+    network_mode: "{{ name_iawe_network }}"
     detach: yes
-    image: iawe_image
+    image: "{{ name_iawe_image }}"
     volumes:
       - "{{ path_iawe_docker_volume }}"
     ports:

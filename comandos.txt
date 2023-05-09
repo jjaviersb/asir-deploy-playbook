@@ -69,3 +69,6 @@ ansible-galaxy collection install community.general
 # error install mysql-workbench
 # error al crear profesor -- por si esta ya creado cambia la pass
 # los paquetes snap no se ven en la ig
+# when: result_asir_root_user.rc != 0 -> rc return code 
+# error comprobar iso ya descargadas
+
