@@ -22,7 +22,7 @@
   shell: "docker build -t {{ name_iawe_image }} ."
   args:
     chdir: "{{ path_iawe_directory }}"
-  when: not iawe_image_info.exists
+  when: not iawe_image_info is defined
 
 - name: IAWE | Create Docker network
   docker_network:
@@ -37,6 +37,7 @@
     env:
       MYSQL_ROOT_PASSWORD: root
     image: mysql
+    container_default_behavior: no_defaults
 
 - name: IAWE | Run PhpMyAdmin container
   docker_container:
@@ -49,6 +50,7 @@
     image: phpmyadmin
     ports:
       - "8080:80"
+    container_default_behavior: no_defaults
 
 - name: IAWE | Run IAWE container
   docker_container:
@@ -62,3 +64,4 @@
     ports:
       - "8000:80"
     restart: yes
+    container_default_behavior: no_defaults

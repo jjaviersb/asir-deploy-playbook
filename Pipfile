@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ansible = "*"
+ansible = "==7.0.0"
 molecule = "*"
 passlib = "*"
 virtualbox = "*"

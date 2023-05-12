@@ -9,7 +9,7 @@ asir_root_user: profesor
 ## VMs
 
 path_images_iso: /home/{{ asir_user }}/imagesISO
-path_custom_images: 
+  # custom_images: # defined for add custom_images
 vm_type_os: Ubuntu_64
 url_ubuntu_server: http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso # v22.04
 url_linux_mint: https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso # v21.1
@@ -21,9 +21,28 @@ url_linux_mint: https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.
   # https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-mate-64bit.iso
   # https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso
   # https://mirror.crexio.com/linuxmint/isos/stable/21.1/linuxmint-21.1-cinnamon-64bit.iso
+
+ubuntu_iso: {name: ubuntuserver-22.04.iso, url: "{{ url_ubuntu_server }}", path: "{{ path_images_iso }}/ubuntuserver-22.04.iso"}
+linuxmint_iso: {name: linuxmint-21.1.iso, url: "{{ url_linux_mint }}", path: "{{ path_images_iso }}/linuxmint-21.1.iso"}
 images_iso:
-  - {name: ubuntuserver-22.04.iso, url: "{{ url_ubuntu_server }}", path: "{{ path_images_iso }}/ubuntuserver-22.04.iso"}
-  - {name: linuxmint-21.1.iso, url: "{{ url_linux_mint }}", path: "{{ path_images_iso }}/linuxmint-21.1.iso"}
+  - "{{ ubuntu_iso }}"
+  - "{{ linuxmint_iso }}"
+
+#values vm us2204
+vm_name_ubuntu: UbuntuServer22-04
+memory_ram_ubuntu: 2048 #2GB
+n_cpus_ubuntu: 2
+disk_size_ubuntu: 20480 #20GB
+
+#values vm lm21
+vm_name_linuxmint: LinuxMint21-1
+memory_ram_linuxmint: 4096 #4GB
+n_cpus_linuxmint: 3
+disk_size_linuxmint: 30720 #30GB
+
+# values vm default
+default_bridgeadapter: enp0s3
+default_hdd_format: VDI
 
 ## IAWE
 
@@ -41,3 +60,7 @@ bbdd_tag_container: latest
 bbdd_image_container: "{{ bbdd_name_container }}:{{ bbdd_tag_container }}"
 
 bbdd_vm_name: bbdd_ubuntuserver
+
+## veyon
+
+veyon_repo: https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb

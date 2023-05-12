@@ -11,16 +11,12 @@
 
 - name: Install Packages | Install APT packages
   apt:
-    name: "{{ item }}"
+    name: "{{ asir_apt_packages }}"
     state: present
-  with_items:
-    - "{{ asir_apt_packages }}"
 
 - name: Install Packages | Install SNAP packages
   snap:
-    name: "{{ item }}"
+    name: "{{ asir_snap_packages }}"
     classic: true
     state: present
-  with_items:
-    - "{{ asir_snap_packages }}"
   when: asir_snap_packages is defined
