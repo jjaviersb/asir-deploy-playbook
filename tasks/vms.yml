@@ -32,11 +32,11 @@
   with_items: "{{ custom_images }}"
   when: custom_images is defined
 ##
-#- name: VMs | Create VirtualBox VM
-#  vboxmanage_guest:
-#    state: stopped
-#    name: "{{ vm_name_ubuntu }}"
-#    ostype: "{{ vm_type_os }}"
+- name: VMs | Create VirtualBox VM
+  vboxmanage_guest:
+    state: stopped
+    name: "{{ vm_name_ubuntu }}"
+    ostype: "{{ vm_type_os }}"
 ##
 - name: "VMs | Check if {{ vm_name_ubuntu }} already exists"
   command: "VBoxManage showvminfo {{ vm_name_ubuntu }}"
