@@ -13,11 +13,11 @@
       tags:
         - install
       
-    - name: Asir Deploy | VMs
+    - name: Asir Deploy | VBox
       become: true 
-      import_tasks: tasks/vms.yml
+      import_tasks: tasks/vbox.yml
       tags:
-        - vms
+        - vbox
     
     - name: Asir Deploy | Docker
       become: true 

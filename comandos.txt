@@ -72,3 +72,85 @@ ansible-galaxy collection install community.general
 # when: result_asir_root_user.rc != 0 -> rc return code 
 # error comprobar iso ya descargadas
 
+
+
+
+"{{ vm_name_ubuntu }}" \
+    --memory "{{ memory_ram_ubuntu }}" \
+    --cpus "{{ cpus_ubuntu }}" \
+    --nic1 "{{ default_net_type }}" \
+    --bridgeadapter1 "{{ default_bridgeadapter }}" \
+    --vram "{{ default_memory_vram }}" \
+    --draganddrop bidirectional \
+    --clipboard bidirectional \
+    --boot1 dvd \
+    --boot2 disk \
+    --boot3 none \
+    --boot4 none
+
+
+vm_ubuntu_options:
+  name: UbuntuServer22-04
+  ram: 2048 #2GB
+  cpus: 2
+  disk_size: 20480 #20GB
+  disk_path: "{{ default_path_vms }}/{{ vm_name_ubuntu }}/{{ vm_name_ubuntu }}"
+
+
+vars:
+    name: "{{ item.name | default('VM_Default') }}"
+    ram: "{{ item.ram | default(2048) }}"
+    cpus: "{{ item.cpus | default(2) }}"
+    disk_size: "{{ item.disk_size | default(20480) }}"
+    disk_path: "{{ item.disk_size | default('{{ default_path_vms }}/VM_Default/VM_Default') }}"
+    net_type: "{{ item.net_type | default('bridged') }}
+    bridgeadapter: "{{ item.bridgeadapter | default('enp0s3') }}
+    vram: "{{ item.vram | default(128) }}"
+
+- name: "VBox | Create {{ vm_name_ubuntu }}"
+    vars:
+        name: "{{ item.name | default('VM_Default') }}"
+        os_type: "{{ item.os_type | default('Ubuntu_64') }}
+        ram: "{{ item.ram | default(2048) }}"
+        cpus: "{{ item.cpus | default(2) }}"
+        disk_size: "{{ item.disk_size | default(20480) }}"
+        disk_path: "{{ item.disk_path | default('{{ default_path_vms }}/VM_Default/VM_Default') }}"
+        disk_format: "{{ item.disk_format | default('VDI') }}
+        net_type: "{{ item.net_type | default('bridged') }}
+        bridgeadapter: "{{ item.bridgeadapter | default('enp0s3') }}
+        vram: "{{ item.vram | default(128) }}"
+    shell: |
+        vboxmanage modifyvm "{{ name }}" \
+        --memory "{{ ram }}" \
+        --cpus "{{ cpus }}" \
+        --nic1 "{{ net_type }}" \
+        --bridgeadapter1 "{{ bridgeadapter }}" \
+        --vram "{{ vram }}" \
+        --draganddrop bidirectional \
+        --clipboard bidirectional \
+        --boot1 dvd \
+        --boot2 disk \
+        --boot3 none \
+        --boot4 none
+    with_items: 
+        - vm_ubuntu_options
+        - vm_linuxmint_options
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
