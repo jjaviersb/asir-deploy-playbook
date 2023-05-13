@@ -13,16 +13,10 @@
     src: "templates/Dockerfile.bin.j2"
     dest: "{{ path_iawe_directory }}/Dockerfile"
 
-- name: Check if IAWE Docker Image exists
-  docker_image_info:
-    name: "{{ name_iawe_image }}"
-  register: iawe_image_info
-
 - name: IAWE | Build Docker Image
   shell: "docker build -t {{ name_iawe_image }} ."
   args:
     chdir: "{{ path_iawe_directory }}"
-  when: not iawe_image_info is defined
 
 - name: IAWE | Create Docker network
   docker_network:

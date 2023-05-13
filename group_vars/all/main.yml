@@ -11,9 +11,6 @@ path_asir_home: "/home/{{ asir_user }}"
 ## VBox
 
 path_images_iso: "{{ path_asir_home }}/imagesISO"
-#custom_images: # defined for add custom_images
-# - /path/example
-# - /path/example2
 
 url_ubuntu_server: http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso # v22.04
 url_linux_mint: https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso # v21.1
@@ -31,6 +28,9 @@ linuxmint_iso: {name: linuxmint-21.1.iso, url: "{{ url_linux_mint }}", path: "{{
 images_iso:
   - "{{ ubuntu_iso }}"
   - "{{ linuxmint_iso }}"
+
+#custom_images: # defined for add custom_images
+# - example_iso: {name: example.iso, src: template/example.j2, path: "{{ path_images_iso }}/example.iso"}
 
 # values vms default
 default_path_vms: "{{ path_asir_home }}/.VMsDisks"

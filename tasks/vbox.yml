@@ -33,12 +33,22 @@
     - "{{ images_iso }}"
   when: not iso_exists is defined or iso_exists is failed
 
+- name: VBox | Check if ISOs exists
+  stat:
+    path: "{{ item.path }}"
+  register: custom_iso_exists
+  failed_when: not iso_exists.stat.exists
+  with_items:
+    - "{{ images_iso }}"
+  ignore_errors: true
+  when: custom_images is defined
+
 - name: VBox | Copy custom images
   template:
     src: "templates/{{ item }}"
     dest: "{{ path_images_iso }}/{{ item }}"
   with_items: "{{ custom_images }}"
-  when: custom_images is defined
+  when: custom_iso_exists is defined and custom_iso_exists is failed
 
 - name: "VBox | Check if VMs already exists"
   shell: "vboxmanage showvminfo {{ item.name }}"

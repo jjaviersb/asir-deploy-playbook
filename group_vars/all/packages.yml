@@ -10,6 +10,9 @@ asir_apt_packages:
   - ca-certificates
   - software-properties-common
   - gnupg
+  # dev
+  - python3
+  - python3-pip
   # utils
   - unrar
   - rar
@@ -65,6 +68,7 @@ asir_apt_packages:
   - sensors-applet
   - isomaster
   - bless
+  - gparted
   # xor
   - apache2-utils
   - apache2-dev

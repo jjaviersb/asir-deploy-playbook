@@ -37,8 +37,8 @@
       tags:
         - bbdd
     
-    - name: Asir Deploy | Veyon
-      become: true 
-      import_tasks: tasks/veyon.yml
-      tags:
-        - veyon
+    #- name: Asir Deploy | Veyon
+    #  become: true 
+    #  import_tasks: tasks/veyon.yml
+    #  tags:
+    #    - veyon

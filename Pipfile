@@ -8,6 +8,7 @@ ansible = "*"
 molecule = "*"
 passlib = "*"
 virtualbox = "*"
+requests = "*"
 
 [dev-packages]
 
