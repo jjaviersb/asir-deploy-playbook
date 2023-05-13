@@ -1,7 +1,7 @@
 ---
 ## General
 
-ansible_user: profesor
+ansible_user: "{{ asir_root_user }}" #Change this option
 
 asir_user: alumno
 asir_root_user: profesor
@@ -44,9 +44,23 @@ vm_options:
   - "{{ vm_linuxmint_options }}"
 
 #values vm us2204
-vm_ubuntu_options: {name: UbuntuServer22-04,ram: 2048,cpus: 2,disk_size: 20480,disk_path: "{{ default_path_vms }}/UbuntuServer22-04"}
+vm_ubuntu_options: {
+  name: UbuntuServer22-04,
+  ram: 2048,
+  cpus: 2,
+  disk_size: 20480,
+  disk_path: "{{ default_path_vms }}/UbuntuServer22-04",
+  iso_path: "{{ ubuntu_iso.path }}"
+  }
 #values vm lm21.1
-vm_linuxmint_options: {name: LinuxMint21-1,ram: 4096,cpus: 3,disk_size: 30720, disk_path: "{{ default_path_vms }}/LinuxMint21-1"}
+vm_linuxmint_options: {
+  name: LinuxMint21-1,
+  ram: 4096,
+  cpus: 3,
+  disk_size: 30720,
+  disk_path: "{{ default_path_vms }}/LinuxMint21-1",
+  iso_path: "{{ linuxmint_iso.path }}"
+  }
 
 ## IAWE
 

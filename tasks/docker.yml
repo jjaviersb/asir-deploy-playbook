@@ -25,6 +25,9 @@
 
 - name: Docker | Add User to Docker Group
   user:
-    name: "{{ asir_user }}"
+    name: "{{ item }}"
     groups: docker
     append: yes
+  loop:
+    - "{{ asir_user }}"
+    - "{{ asir_root_user }}"
