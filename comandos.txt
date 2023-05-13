@@ -74,7 +74,8 @@ ansible-galaxy collection install community.general
 
 # error en disk_path: "{{ default_path_vms }}/{{ self.name }}" problema con el loop.
 
-
+# add collections local
+    # ansible-galaxy collection install -r requirements.yml --collections-path ./collections
 
 
 
