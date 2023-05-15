@@ -9,7 +9,12 @@
   apt:
     deb: "{{ veyon_options.path }}"
     state: present
-  
+
+- name: IAWE | Delete Veyon Package
+  file:
+    path: "{{ veyon_options.path }}"
+    state: absent
+
 - name: IAWE | Create Directory
   file:
     path: "{{ veyon_directory_key }}"
@@ -19,6 +24,9 @@
   copy:
     src: "{{ veyon_key.src }}"
     dest: "{{ veyon_key.dest }}"
+
+- name: Veyon | Change Authentication Mode
+  shell: veyon-cli config set Authentication/Method 1
 
 - name: Veyon | Import Veyon Key
   shell: veyon-cli authkeys import "{{ veyon_key.name }}"/public ./"{{ veyon_key.key }}"
