@@ -12,6 +12,23 @@
       import_tasks: tasks/install.yml
       tags:
         - install
+    
+    - name: Asir Deploy | Create Directories
+      become: true
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ asir_user }}"
+        group: "{{ asir_user }}"
+        mode: 0755
+      loop: "{{ new_directories }}"
+    
+    - name: Asir Deploy | Copy Templates
+      become: true
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ templates }}"
       
     - name: Asir Deploy | VBox
       become: true 
@@ -36,9 +53,10 @@
       import_tasks: tasks/bbdd.yml
       tags:
         - bbdd
+
+    - name: Asir Deploy | Veyon
+      become: true 
+      import_tasks: tasks/veyon.yml
+      tags:
+        - veyon
     
-    #- name: Asir Deploy | Veyon
-    #  become: true 
-    #  import_tasks: tasks/veyon.yml
-    #  tags:
-    #    - veyon

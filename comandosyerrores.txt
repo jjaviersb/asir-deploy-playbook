@@ -77,9 +77,24 @@ ansible-galaxy collection install community.general
 # add collections local
     # ansible-galaxy collection install -r requirements.yml --collections-path ./collections
 
+# ls /usr/bin/veyon*
+# /usr/bin/veyon-auth-helper   /usr/bin/veyon-master   /usr/bin/veyon-worker
+# /usr/bin/veyon-cli           /usr/bin/veyon-server
+# /usr/bin/veyon-configurator  /usr/bin/veyon-service
 
+    # autenticacion - autenticacion mediante archivo de clave
 
+# no puedo añadir que el localhost genere key veyon
 
+# veyon-cli authkeys list
+# export - import key
+# configure master && slave - keys, backends,defaults
+    # sudo veyon-cli authkeys create asir
+    # sudo veyon-cli authkeys setaccessgroup asir/public <user in localhost>
+    # sudo veyon-cli authkeys setaccessgroup asir/private <user in localhost>
+    # veyon-cli authkeys export asir/public (directorio activo)
+    # tasks client
+# sudo veyon-master
 
 
 

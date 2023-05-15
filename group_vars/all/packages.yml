@@ -76,7 +76,6 @@ asir_apt_packages:
   - lynx
   - wget
   # programs
-  - docker
   - virtualbox
 
 asir_snap_packages:

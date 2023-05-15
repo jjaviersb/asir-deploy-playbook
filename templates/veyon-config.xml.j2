@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE veyon-config>
+<configuration>
+  <general>
+    <language>es_ES</language>
+    <autostart>true</autostart>
+  </general>
+   <security>
+    <allow-remote-control>true</allow-remote-control>
+    <allow-remote-monitoring>true</allow-remote-monitoring>
+    <authentication>
+      <method>key</method>
+      <auto-create>true</auto-create>
+      <keys-dir>/etc/veyon/keys</keys-dir>
+    </authentication>
+  </security>
+  <master>
+    <plugins>
+      <plugin>
+        <name>process-list</name>
+        <enabled>true</enabled>
+      </plugin>
+      <plugin>
+        <name>power-control</name>
+        <enabled>true</enabled>
+      </plugin>
+    </plugins>
+  </master>
+</configuration>

@@ -1,18 +1,5 @@
 ---
 
-- name: IAWE | Create Directory
-  file:
-    path: "{{ path_iawe_directory }}"
-    state: directory
-    owner: "{{ asir_user }}"
-    group: "{{ asir_user }}"
-    mode: 0755
-
-- name: IAWE | Copy Dockerfile
-  template:
-    src: "templates/Dockerfile.bin.j2"
-    dest: "{{ path_iawe_directory }}/Dockerfile"
-
 - name: IAWE | Build Docker Image
   shell: "docker build -t {{ name_iawe_image }} ."
   args:

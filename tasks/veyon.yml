@@ -1,11 +1,35 @@
 ---
-- name: Veyon | Add Veyon Repository
-  apt_repository:
-    repo: "deb https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb"
-    state: present
-    update_cache: yes
+- name: Veyon | Download Veyon Package
+  become_user: "{{ asir_user }}"
+  get_url:
+    url: "{{ veyon_options.url }}"
+    dest: "{{ veyon_options.path }}"
 
-- name: Veyon | Install Veyon
+- name: Veyon | Install Veyon Package
   apt:
-    name: veyon
+    deb: "{{ veyon_options.path }}"
     state: present
+  
+- name: IAWE | Create Directory
+  file:
+    path: "{{ veyon_directory_key }}"
+    state: directory
+
+- name: Veyon | Copy Veyon Key
+  copy:
+    src: "{{ veyon_key.src }}"
+    dest: "{{ veyon_key.dest }}"
+
+- name: Veyon | Import Veyon Key
+  shell: veyon-cli authkeys import "{{ veyon_key.name }}"/public ./"{{ veyon_key.key }}"
+  args:
+    chdir: "{{ veyon_directory_key }}"
+
+- name: Veyon | Start Veyon Service
+  service:
+    name: veyon
+    state: started
+    enabled: yes
+
+
+

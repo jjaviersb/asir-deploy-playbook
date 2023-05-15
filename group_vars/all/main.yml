@@ -8,6 +8,15 @@ asir_root_user: profesor
 
 path_asir_home: "/home/{{ asir_user }}"
 
+new_directories:
+  - "{{ path_iawe_directory }}"
+  - "{{ path_images_iso }}"
+  - "{{ default_path_vms }}"
+
+templates:
+ - {src: templates/Dockerfile.bin.j2, dest: "{{ path_iawe_directory }}/Dockerfile"}
+ #- {src: templates/veyon-config.xml.j2, dest: "{{ path_veyon }}/.configurefile/veyon-config.xml"}
+
 ## VBox
 
 path_images_iso: "{{ path_asir_home }}/imagesISO"
@@ -30,7 +39,7 @@ images_iso:
   - "{{ linuxmint_iso }}"
 
 #custom_images: # defined for add custom_images
-# - example_iso: {name: example.iso, src: template/example.j2, path: "{{ path_images_iso }}/example.iso"}
+# - example_iso: {name: example.iso, src: template/example.j2, dest: "{{ path_images_iso }}/example.iso"}
 
 # values vms default
 default_path_vms: "{{ path_asir_home }}/.VMsDisks"
@@ -81,4 +90,9 @@ bbdd_vm_name: bbdd_ubuntuserver
 
 ## veyon
 
-veyon_repo: https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb
+path_veyon: /etc/veyon
+
+veyon_options: {
+  url: https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb,
+  path: "{{ path_asir_home }}/Descargas/veyon.deb"
+}

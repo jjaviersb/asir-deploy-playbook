@@ -1,21 +1,5 @@
 ---
 
-- name: VBox | Create Directory for ISO Images
-  file:
-    path: "{{ path_images_iso }}"
-    state: directory
-    owner: "{{ asir_user }}"
-    group: "{{ asir_user }}"
-    mode: 0755
-
-- name: VBox | Create Directory for VMs Disks
-  file:
-    path: "{{ default_path_vms }}"
-    state: directory
-    owner: "{{ asir_user }}"
-    group: "{{ asir_user }}"
-    mode: 0755
-
 - name: VBox | Check if ISOs exists
   stat:
     path: "{{ item.path }}"
@@ -33,9 +17,9 @@
     - "{{ images_iso }}"
   when: not iso_exists is defined or iso_exists is failed
 
-- name: VBox | Check if ISOs exists
+- name: VBox | Check if Custom ISOs exists
   stat:
-    path: "{{ item.path }}"
+    path: "{{ item.dest }}"
   register: custom_iso_exists
   failed_when: not iso_exists.stat.exists
   with_items:
@@ -45,9 +29,9 @@
 
 - name: VBox | Copy custom images
   template:
-    src: "templates/{{ item }}"
-    dest: "{{ path_images_iso }}/{{ item }}"
-  with_items: "{{ custom_images }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop: "{{ custom_images }}"
   when: custom_iso_exists is defined and custom_iso_exists is failed
 
 - name: "VBox | Check if VMs already exists"
