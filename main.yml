@@ -1,5 +1,7 @@
 ---
 - hosts: asir
+  vars:
+    ansible_become_pass: "{{ become_password }}"
   tasks:
     - name: Asir Deploy | Create Users
       become: True

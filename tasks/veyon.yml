@@ -32,6 +32,7 @@
   shell: veyon-cli authkeys import "{{ veyon_key.name }}"/public ./"{{ veyon_key.key }}"
   args:
     chdir: "{{ veyon_directory_key }}"
+  ignore_errors: True
 
 - name: Veyon | Start Veyon Service
   service:

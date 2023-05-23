@@ -96,6 +96,24 @@ ansible-galaxy collection install community.general
     # tasks client
 # sudo veyon-master
 
+# no instala el jenkins
+# download .war jenkins
+# java -jar jenkins.war
+# copy pass
+# localhost:8080
+
+ANSIBLE IN JENKINS
+# Panel de Control -> Administrar Jenkins -> Gestor de plugins -> Available Plugins -> Ansible
+cd /home/javiersb/workspace/asir-deploy_playbook
+pipenv run ansible-playbook main.yml
+# /home/javiersb/workspace/asir-deploy_playbook/main.yml
+
+
+
+
+
+
+
 
 
 
