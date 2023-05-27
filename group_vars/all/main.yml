@@ -1,12 +1,21 @@
 ---
 ## General
 
-ansible_user: "{{ asir_root_user }}" #Change this option
+ansible_user: "{{ asir_root_user }}" 
+
+hosts_deploy:
+  - 192.168.1.11
+  - 192.168.1.20
 
 asir_user: alumno
+path_asir_home: "/home/{{ asir_user }}"
 asir_root_user: profesor
 
-path_asir_home: "/home/{{ asir_user }}"
+hostnames: "{{ hosts_deploy }}"
+username: "{{ asir_root_user }}"
+password: "{{ password_root_user }}"
+ssh_public_key: /home/javiersb/.ssh/id_rsa.pub
+# port: 22 default
 
 new_directories:
   - "{{ path_iawe_directory }}"

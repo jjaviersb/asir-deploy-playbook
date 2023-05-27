@@ -1,14 +1,27 @@
 ##Comentarios, comandos
 
+/home/javiersb/.local/share/virtualenvs/asir-deploy_playbook-2fTrB4Tr/bin/python3.10
+
 #Iniciar host remotos
     $ visudo 
     #includedir /etc/sudoers.d
     ansible      ALL=(ALL)       NOPASSWD: ALL
 
-    ## Introducir clave ssh al host remoto
-    ssh-copy-id javiersb@192.168.1.15
-    Habilitar conexion remota con publick key -> /etc/ssh/sshd_config PubkeyAuthentication yes
-    Reiniciar ssh
+    ## ssh-keygen -N {{password}} -f {{file}}
+
+    ----------## sudo apt install sshpass
+
+    --------sudo nano /etc/ssh/ssh_config
+    ------------StrictHostKeyChecking accept-new
+
+    ansible-galaxy install -r requirements.yml -p roles
+
+    En Ansible, las tareas dentro de un rol se ejecutan antes de las tareas definidas fuera de los roles. 
+    Esto significa que, en tu playbook, las tareas dentro del rol ssh_copy_id se ejecutarán antes de las tareas definidas bajo el bloque tasks.
+
+    FIXED with pre_tasks
+
+    generate inventory.ini with inventory .j2
 
 
 # Archivo ansible.cfg muy importante
@@ -28,7 +41,7 @@ encriptamos en vault las passwords
 
 ##errores al crear usuarios
     no añadir encriptacion a las passwords, (linux no sabia detectarlas o yks)
-    al añadir los hash, no borrar las carpetas home y habia errores con los .bashrc o .bash_profile o asi que habian el las carpetas de los users
+    al añadir los hash, no borrar las carpetas home y habia errores con los .bashrc o .bash_profile o asi que habian en las carpetas de los users
 
 # pasar passwd (al instalar cosas)
     ansible.cfg -> ask_become_pass
@@ -48,27 +61,10 @@ encriptamos en vault las passwords
 # error vboxmanage
 ansible-galaxy collection install community.general
 
-- name: BBDD | Create VirtualBox VM
-  vboxmanage:
-    name: "{{ bbdd_vm_name }}"
-    ostype: "{{ vm_type_os }}"
-    state: poweredoff
-    register: result
-
-- name: BBDD | Attach ISO to VirtualBox VM
-  vboxmanage:
-    name: "{{ bbdd_vm_name }}"
-    storagectl: SATA
-    port: 0
-    device: 0
-    type: dvddrive
-    medium: "{{ images_iso[0].path }}" # 0 us22.04 // 1 lm21
-  when: result.changed or result.present
-
 # error install snapd
 # error install mysql-workbench
 # error al crear profesor -- por si esta ya creado cambia la pass
-# los paquetes snap no se ven en la ig
+# los paquetes snap no se ven en la interfaz grafica (solved)
 # when: result_asir_root_user.rc != 0 -> rc return code 
 # error comprobar iso ya descargadas
 
@@ -108,7 +104,11 @@ cd /home/javiersb/workspace/asir-deploy_playbook
 pipenv run ansible-playbook main.yml
 # /home/javiersb/workspace/asir-deploy_playbook/main.yml
 
+JENKINS
+# He ocultado las key ssh para comprobar si funciona con jenkins solo
 
+veyon-cli config set Computers.1.Name Equipo1 && veyon-ctl config set Computers.1.IPAddress 192.168.1.100
+veyon-cli config set Computers.2.Name Equipo2 && veyon-ctl config set Computers.2.IPAddress 192.168.1.101
 
 
 

@@ -1,5 +1,5 @@
 ---
-collections:
-- community.general
-- community.docker
-- community.mysql
+roles:
+  - name: ssh_copy_id
+    src: https://github.com/jjaviersb/ansible-ssh-copy-id
+    #version

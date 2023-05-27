@@ -9,6 +9,7 @@ molecule = "*"
 passlib = "*"
 virtualbox = "*"
 requests = "*"
+paramiko = "*"
 
 [dev-packages]
 
