@@ -105,10 +105,12 @@ pipenv run ansible-playbook main.yml
 # /home/javiersb/workspace/asir-deploy_playbook/main.yml
 
 JENKINS
-# He ocultado las key ssh para comprobar si funciona con jenkins solo
 
-veyon-cli config set Computers.1.Name Equipo1 && veyon-ctl config set Computers.1.IPAddress 192.168.1.100
-veyon-cli config set Computers.2.Name Equipo2 && veyon-ctl config set Computers.2.IPAddress 192.168.1.101
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key |sudo gpg --dearmor -o /usr/share/keyrings/jenkins.gpg
+sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install jenkins
+sudo ufw allow 8080
 
 
 

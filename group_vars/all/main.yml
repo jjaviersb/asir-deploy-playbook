@@ -5,7 +5,7 @@ ansible_user: "{{ asir_root_user }}"
 
 hosts_deploy:
   - 192.168.1.11
-  - 192.168.1.20
+  - 192.168.1.21
 
 asir_user: alumno
 path_asir_home: "/home/{{ asir_user }}"
@@ -48,7 +48,7 @@ images_iso:
   - "{{ linuxmint_iso }}"
 
 #custom_images: # defined for add custom_images
-# - example_iso: {name: example.iso, src: template/example.j2, dest: "{{ path_images_iso }}/example.iso"}
+# - example_iso: {name: example.iso, src: files/example.iso, dest: "{{ path_images_iso }}/example.iso"}
 
 # values vms default
 default_path_vms: "{{ path_asir_home }}/.VMsDisks"
