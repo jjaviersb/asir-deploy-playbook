@@ -14,4 +14,4 @@ roles/
 **/.vscode
 .*
 ejecutar.sh*
-inventory/localnet.ini
+inventory/localnet.j2
