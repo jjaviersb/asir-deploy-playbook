@@ -1,8 +1,8 @@
 ---
-#- name: Create inventory file from template
-#  template:
-#    src: inventory/localnet.j2
-#    dest: inventory/localnet.ini
+- name: Create inventory file from template
+  template:
+    src: inventory/localnet.j2
+    dest: inventory/localnet.ini
 
 - name: Localhost | Generate SSH Key
   user:
