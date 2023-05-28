@@ -5,7 +5,7 @@ ansible_user: "{{ asir_root_user }}"
 
 hosts_deploy:
   - 192.168.1.11
-  - 192.168.1.21
+  - 192.168.1.23
 
 asir_user: alumno
 path_asir_home: "/home/{{ asir_user }}"
