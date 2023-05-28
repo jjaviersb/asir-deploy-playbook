@@ -7,7 +7,6 @@ pipeline {
                 stage('FULL') {
                     steps {
                         sh '''
-                            cd /home/javiersb/workspace/asir-deploy_playbook
                             pipenv run ansible-galaxy install -r requirements.yml
                             pipenv run ansible-playbook main.yml
                         '''
