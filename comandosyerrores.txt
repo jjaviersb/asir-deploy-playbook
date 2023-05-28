@@ -112,9 +112,10 @@ sudo apt update
 sudo apt install jenkins
 sudo ufw allow 8080
 
+pipenv run ansible-galaxy install -r requirements.yml
+pipenv run ansible-playbook main.yml
 
-
-
+sudo usermod -aG $USER jenkins
 
 
 
