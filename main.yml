@@ -16,12 +16,12 @@
   #      - ssh_copy_id
   #      - localhost
 
-#- hosts: localhost
-#  roles:
-#    - name: ssh_copy_id
-#      tags: 
-#        - ssh_copy_id
-#        - localhost
+- hosts: localhost
+  roles:
+    - name: ssh_copy_id
+      tags: 
+        - ssh_copy_id
+        - localhost
 
 - hosts: asir
   vars:
