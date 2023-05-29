@@ -1,12 +1,14 @@
 pipeline {
     agent any
-
+    enviroment {
+        ASNIBLE_VAULT_PASSWORD = credentials('.vault')
+    }
     stages {
         stage('ASIR_DEPLOY') {
             steps {
                 script {
                     sh 'pipenv run ansible-galaxy install -r requirements.yml'
-                    sh 'pipenv run ansible-playbook main.yml'
+                    sh 'pipenv run ansible-playbook main.yml --VAULT_PASSWORD=$ASNIBLE_VAULT_PASSWORD'
                 }
             }
         }
