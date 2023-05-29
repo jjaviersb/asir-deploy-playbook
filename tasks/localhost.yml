@@ -1,8 +1,8 @@
 ---
-#- name: Create inventory file from template
-#  template:
-#    src: inventory/localnet.j2
-#    dest: inventory/localnet.ini
+- name: Create inventory file from template
+  template:
+    src: ./inventory/localnet.j2
+    dest: ./inventory/localnet.ini
 
 - name: Localhost | Generate SSH Key
   user:
@@ -14,10 +14,6 @@
     ssh_key_passphrase: 12345
     state: present
     force: no
-
-- name: Localhost | Update APT list
-  apt:
-    update_cache: yes
 
 - name: Localhost | Check if Veyon is installed
   command: veyon-master
