@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     sh 'pipenv run ansible-galaxy install -r requirements.yml'
-                    sh 'pipenv run ansible-playbook main.yml --VAULT_PASSWORD=$ASNIBLE_VAULT_PASSWORD'
+                    sh 'pipenv run ansible-playbook main.yml --vault-password-file=$ASNIBLE_VAULT_PASSWORD'
                 }
             }
         }
