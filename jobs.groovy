@@ -68,6 +68,6 @@ folder('ASIR_DEPLOY') {
 
   def ansiblePlaybook(tags) {
     sh "pipenv run ansible-galaxy install -r requirements.yml"
-    sh "pipenv run ansible-playbook main.yml --vault-password-file=.vault --tags $tags"
+    sh "pipenv run ansible-playbook $tags --vault-password-file=.vault"
   }
 }
