@@ -10,16 +10,21 @@
 #      tags:
 #        - localhost
 
-  roles:
-    - name: ssh_copy_id
-      tags: 
-        - ssh_copy_id
-        - localhost
+  #roles:
+  #  - name: ssh_copy_id
+  #    tags: 
+  #      - ssh_copy_id
+  #      - localhost
 
 - hosts: asir
   vars:
     ansible_become_pass: "{{ become_password }}"
   become: true
+  roles:
+    - name: ssh_copy_id
+      tags: 
+        - ssh_copy_id
+        - localhost
   tasks:
     - name: Asir Deploy | Create Users
       import_tasks: tasks/users.yml
