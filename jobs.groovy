@@ -1,78 +1,71 @@
 pipeline {
     agent any
     
-    stages {
-        stage('FULL') {
+    folder('ASIR_DEPLOY') {
+        job('FULL') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml
                 '''
             }
         }
         
-        stage('LOCALHOST') {
+        job('LOCALHOST') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml --tags localhost
                 '''
             }
         }
         
-        stage('INSTALL_PACKAGES') {
+        job('INSTALL_PACKAGES') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml --tags install
                 '''
             }
         }
         
-        stage('VBOX') {
+        job('VBOX') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml --tags vbox
                 '''
             }
         }
         
-        stage('IAWE') {
+        job('IAWE') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml --tags iawe
                 '''
             }
         }
         
-        stage('BBDD') {
+        job('BBDD') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml --tags bbdd
                 '''
             }
         }
         
-        stage('VEYON') {
+        job('VEYON') {
             steps {
-                sh 'pipenv install'
-                
                 sh '''
+                    pipenv install
                     pipenv run ansible-galaxy install -r requirements.yml
                     pipenv run ansible-playbook main.yml --tags veyon
                 '''
