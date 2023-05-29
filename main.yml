@@ -70,6 +70,6 @@
       tags:
         - veyon
     
-    - name: Asir Deploy | Poweroff host/s
-      command: poweroff
-      ignore_errors: true    
+    #- name: Asir Deploy | Poweroff host/s
+    #  command: poweroff
+    #  ignore_errors: true    
