@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('ASIR_DEPLOY') {
+            steps {
+                script {
+                    sh 'pipenv run ansible-galaxy install -r requirements.yml'
+                    sh 'pipenv run ansible-playbook main.yml'
+                }
+            }
+        }
+    }
+}
+// groovy
