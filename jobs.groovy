@@ -1,11 +1,12 @@
 folder('ASIR_DEPLOY') {
-    def pipenvInstall() {
-        sh 'pipenv install'
-    }
-
-    def ansiblePlaybook(tags) {
-        sh "pipenv run ansible-galaxy install -r requirements.yml"
-        sh "pipenv run ansible-playbook $tags --vault-password-file=.vault"
+    script{
+        def pipenvInstall() {
+            sh 'pipenv install'
+        }
+        def ansiblePlaybook(tags) {
+            sh "pipenv run ansible-galaxy install -r requirements.yml"
+            sh "pipenv run ansible-playbook $tags --vault-password-file=.vault"
+        }
     }
   stage('FULL') {
     steps {
