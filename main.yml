@@ -1,14 +1,14 @@
 ---
-- hosts: localhost
-  gather_facts: false
-  vars:
-    ansible_become_pass: "{{ become_pass_local }}"
-  become: true
-  pre_tasks:
-    - name: Localhost | Localhost Tasks
-      import_tasks: tasks/localhost.yml
-      tags:
-        - localhost
+#- hosts: localhost
+#  gather_facts: false
+#  vars:
+#    ansible_become_pass: "{{ become_pass_local }}"
+#  become: true
+#  pre_tasks:
+#    - name: Localhost | Localhost Tasks
+#      import_tasks: tasks/localhost.yml
+#      tags:
+#        - localhost
 
   roles:
     - name: ssh_copy_id
