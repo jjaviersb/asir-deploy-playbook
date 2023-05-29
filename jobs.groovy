@@ -1,73 +1,82 @@
-folder('ASIR_DEPLOY') {
-    script{
-        def pipenvInstall() {
-            sh 'pipenv install'
+pipeline {
+    agent any
+    
+    stages {
+        stage('FULL') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml
+                '''
+            }
         }
-        def ansiblePlaybook(tags) {
-            sh "pipenv run ansible-galaxy install -r requirements.yml"
-            sh "pipenv run ansible-playbook $tags --vault-password-file=.vault"
+        
+        stage('LOCALHOST') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml --tags localhost
+                '''
+            }
+        }
+        
+        stage('INSTALL_PACKAGES') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml --tags install
+                '''
+            }
+        }
+        
+        stage('VBOX') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml --tags vbox
+                '''
+            }
+        }
+        
+        stage('IAWE') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml --tags iawe
+                '''
+            }
+        }
+        
+        stage('BBDD') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml --tags bbdd
+                '''
+            }
+        }
+        
+        stage('VEYON') {
+            steps {
+                sh 'pipenv install'
+                
+                sh '''
+                    pipenv run ansible-galaxy install -r requirements.yml
+                    pipenv run ansible-playbook main.yml --tags veyon
+                '''
+            }
         }
     }
-  stage('FULL') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml')
-      }
-    }
-  }
-
-  stage('LOCALHOST') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml --tags localhost')
-      }
-    }
-  }
-
-  stage('INSTALL_PACKAGES') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml --tags install')
-      }
-    }
-  }
-
-  stage('VBOX') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml --tags vbox')
-      }
-    }
-  }
-
-  stage('IAWE') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml --tags iawe')
-      }
-    }
-  }
-
-  stage('BBDD') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml --tags bbdd')
-      }
-    }
-  }
-
-  stage('VEYON') {
-    steps {
-      script {
-        pipenvInstall()
-        ansiblePlaybook('main.yml --tags veyon')
-      }
-    }
-  }
 }
