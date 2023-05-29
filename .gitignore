@@ -9,8 +9,7 @@ roles/
 *.iml
 .idea
 .project
-#comandos.txt
-*.pyc
+comandos.*
 **/.vscode
 .*
 ejecutar.sh*
