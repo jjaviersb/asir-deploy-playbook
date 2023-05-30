@@ -12,13 +12,12 @@
         - localhost
   roles:
     - name: ssh_copy_id
-      vars:
-        ssh_public_key: /var/lib/jenkins/.ssh/id_rsa.pub
       tags: 
         - ssh_copy_id
         - localhost
 
 - hosts: asir
+remote_user: jenkins
   gather_facts: false
   vars:
     ansible_become_pass: "{{ become_password }}"

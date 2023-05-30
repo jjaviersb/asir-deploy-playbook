@@ -14,7 +14,7 @@ asir_root_user: profesor
 hostnames: "{{ hosts_deploy }}"
 username: "{{ asir_root_user }}"
 password: "{{ password_root_user }}"
-#ssh_public_key: /home/javiersb/.ssh/id_rsa.pub
+ssh_public_key: /var/lib/jenkins/.ssh/id_rsa.pub
 # port: 22 default
 
 new_directories:
