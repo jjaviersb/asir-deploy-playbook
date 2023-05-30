@@ -11,97 +11,13 @@ asir_user: alumno
 path_asir_home: "/home/{{ asir_user }}"
 asir_root_user: profesor
 
+# vars for ssh-copy-id role
 hostnames: "{{ hosts_deploy }}"
 username: "{{ asir_root_user }}"
 password: "{{ become_password }}"
-ssh_public_key: /home/javiersb/.ssh/id_rsa.pub
-# port: 22 default
+ssh_public_key: "{{ ssh_key_path }}"
+#port: 22 --> default
 
-new_directories:
-  - "{{ path_iawe_directory }}"
-  - "{{ path_images_iso }}"
-  - "{{ default_path_vms }}"
+dockerfile_template: {src: templates/Dockerfile.bin.j2, dest: "{{ path_iawe_directory }}/Dockerfile"}
+# template_example: {src: templates/example.j2, dest: "{{ path_example }}/example.example"}
 
-templates:
- - {src: templates/Dockerfile.bin.j2, dest: "{{ path_iawe_directory }}/Dockerfile"}
- #- {src: templates/veyon-config.xml.j2, dest: "{{ path_veyon }}/.configurefile/veyon-config.xml"}
-
-## VBox
-
-path_images_iso: "{{ path_asir_home }}/imagesISO"
-
-url_ubuntu_server: http://releases.ubuntu.com/22.04.2/ubuntu-22.04.2-live-server-amd64.iso # v22.04
-url_linux_mint: https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso # v21.1
-  # Another options ( Spain Servers Only )
-  # linux mint v21
-  # https://ftp.cixug.es/mint/stable/21/linuxmint-21-mate-64bit.iso
-  # https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-cinnamon-64bit.iso
-  # https://ftp.cixug.es/mint/stable/21/linuxmint-21-cinnamon-64bit.iso
-  # https://mirror.airenetworks.es/linuxmint/iso/stable/21/linuxmint-21-mate-64bit.iso
-  # https://ftp.cixug.es/mint/stable/21.1/linuxmint-21.1-mate-64bit.iso
-  # https://mirror.crexio.com/linuxmint/isos/stable/21.1/linuxmint-21.1-cinnamon-64bit.iso
-
-ubuntu_iso: {name: ubuntuserver-22.04.iso, url: "{{ url_ubuntu_server }}", path: "{{ path_images_iso }}/ubuntuserver-22.04.iso"}
-linuxmint_iso: {name: linuxmint-21.1.iso, url: "{{ url_linux_mint }}", path: "{{ path_images_iso }}/linuxmint-21.1.iso"}
-images_iso:
-  - "{{ ubuntu_iso }}"
-  - "{{ linuxmint_iso }}"
-
-#custom_images: # defined for add custom_images
-# - example_iso: {name: example.iso, src: files/example.iso, dest: "{{ path_images_iso }}/example.iso"}
-
-# values vms default
-default_path_vms: "{{ path_asir_home }}/.VMsDisks"
-default_bridgeadapter: enp0s3
-default_hdd_format: VDI
-default_net_type: bridged
-default_memory_vram: 128 # MB
-
-vm_options:
-  - "{{ vm_ubuntu_options }}"
-  - "{{ vm_linuxmint_options }}"
-
-#values vm us2204
-vm_ubuntu_options: {
-  name: UbuntuServer22-04,
-  ram: 2048,
-  cpus: 2,
-  disk_size: 20480,
-  disk_path: "{{ default_path_vms }}/UbuntuServer22-04",
-  iso_path: "{{ ubuntu_iso.path }}"
-  }
-#values vm lm21.1
-vm_linuxmint_options: {
-  name: LinuxMint21-1,
-  ram: 4096,
-  cpus: 3,
-  disk_size: 30720,
-  disk_path: "{{ default_path_vms }}/LinuxMint21-1",
-  iso_path: "{{ linuxmint_iso.path }}"
-  }
-
-## IAWE
-
-path_iawe_directory: "/home/{{ asir_user }}/iawe"
-path_iawe_docker_volume: "{{ path_iawe_directory }}:/var/www/html"
-name_iawe_image: iawe_image
-name_iawe_container: iawe_php # Container with Apache and PHP
-name_iawe_network: iawe_net
-name_iawe_db: iawe_db
-
-## BBDD
-
-bbdd_name_container: fernandorodriguezmoron/mysql
-bbdd_tag_container: latest
-bbdd_image_container: "{{ bbdd_name_container }}:{{ bbdd_tag_container }}"
-
-bbdd_vm_name: bbdd_ubuntuserver
-
-## veyon
-
-path_veyon: /etc/veyon
-
-veyon_options: {
-  url: https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb,
-  path: "{{ path_asir_home }}/veyon.deb"
-}

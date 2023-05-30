@@ -1,4 +1,19 @@
 ---
+- name: VBox | Create Directory for ISOs
+  file:
+    path: "{{ path_images_iso }}"
+    state: directory
+    owner: "{{ asir_user }}"
+    group: "{{ asir_user }}"
+    mode: 0755
+  
+- name: VBox | Create Directory for VMs
+  file:
+    path: "{{ default_path_vms }}"
+    state: directory
+    owner: "{{ asir_user }}"
+    group: "{{ asir_user }}"
+    mode: 0755
 
 - name: VBox | Check if ISOs exists
   stat:

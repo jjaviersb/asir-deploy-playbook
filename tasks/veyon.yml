@@ -10,12 +10,12 @@
     deb: "{{ veyon_options.path }}"
     state: present
 
-- name: IAWE | Delete Veyon Package
+- name: Veyon | Delete Veyon Package
   file:
     path: "{{ veyon_options.path }}"
     state: absent
 
-- name: IAWE | Create Directory
+- name: Veyon | Create Veyon Directory
   file:
     path: "{{ veyon_directory_key }}"
     state: directory

@@ -1,18 +1,10 @@
 ---
 - hosts: localhost
-#  gather_facts: false
-  remote_user: javiersb
-  become: true
-  vars:
-    ansible_become_pass: "{{ become_local }}"
   pre_tasks:
     - name: Localhost | Localhost Tasks
       import_tasks: tasks/localhost.yml
       tags:
         - localhost
-    
-    - name: prueba
-      shell: whoami
 
   roles:
     - name: ssh_copy_id
@@ -21,11 +13,9 @@
         - localhost
 
 - hosts: asir
-#  gather_facts: false
-#  remote_user: jenkins
-  vars:
-    ansible_become_pass: "{{ become_password }}"
   become: true
+#  vars:
+#    ansible_become_password: "{{ become_password }}"
   tasks:
     - name: Asir Deploy | Create Users
       import_tasks: tasks/users.yml
@@ -36,21 +26,6 @@
       import_tasks: tasks/install.yml
       tags:
         - install
-    
-    - name: Asir Deploy | Create Directories
-      file:
-        path: "{{ item }}"
-        state: directory
-        owner: "{{ asir_user }}"
-        group: "{{ asir_user }}"
-        mode: 0755
-      loop: "{{ new_directories }}"
-    
-    - name: Asir Deploy | Copy Templates
-      template:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-      loop: "{{ templates }}"
       
     - name: Asir Deploy | VBox
       import_tasks: tasks/vbox.yml
@@ -79,4 +54,4 @@
     
     #- name: Asir Deploy | Poweroff host/s
     #  command: poweroff
-    #  ignore_errors: true    
+    #  ignore_errors: true

@@ -1,0 +1,10 @@
+---
+
+## IAWE
+
+path_iawe_directory: "/home/{{ asir_user }}/iawe"
+path_iawe_docker_volume: "{{ path_iawe_directory }}:/var/www/html"
+name_iawe_image: iawe_image
+name_iawe_container: iawe_php # Container with Apache and PHP
+name_iawe_network: iawe_net
+name_iawe_db: iawe_db
