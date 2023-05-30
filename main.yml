@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
 #  gather_facts: false
-  remote_user: jenkins
+  remote_user: javiersb
   pre_tasks:
     - name: Localhost | Localhost Tasks
       import_tasks: tasks/localhost.yml
@@ -10,7 +10,7 @@
     
     - name: prueba
       shell: whoami
-      
+
   roles:
     - name: ssh_copy_id
       tags: 
@@ -19,7 +19,7 @@
 
 - hosts: asir
 #  gather_facts: false
-  remote_user: jenkins
+#  remote_user: jenkins
   vars:
     ansible_become_pass: "{{ become_password }}"
   become: true
