@@ -1,19 +1,22 @@
 ---
-#- hosts: localhost
-#  gather_facts: false
-#  vars:
-#    ansible_become_pass: "{{ become_pass_local }}"
-#  become: true
-#  pre_tasks:
-#    - name: Localhost | Localhost Tasks
-#      import_tasks: tasks/localhost.yml
-#      tags:
-#        - localhost
-#  roles:
-#    - name: ssh_copy_id
-#      tags: 
-#        - ssh_copy_id
-#        - localhost
+- hosts: localhost
+  gather_facts: false
+  remote_user: jenkins
+  #vars:
+  #  ansible_become_pass: "{{ become_pass_local }}"
+  #become: true
+  pre_tasks:
+    - name: Localhost | Localhost Tasks
+      import_tasks: tasks/localhost.yml
+      tags:
+        - localhost
+  roles:
+    - name: ssh_copy_id
+      vars:
+        ssh_public_key: ./.ssh/id_rsa.pub
+      tags: 
+        - ssh_copy_id
+        - localhost
 
 - hosts: asir
   vars:
