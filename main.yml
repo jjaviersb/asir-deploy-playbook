@@ -17,7 +17,7 @@
         - localhost
 
 - hosts: asir
-remote_user: jenkins
+  remote_user: jenkins
   gather_facts: false
   vars:
     ansible_become_pass: "{{ become_password }}"
