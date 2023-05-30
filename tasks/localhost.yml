@@ -17,11 +17,11 @@
 
 # Need veyon installed
 
-- name: Localhost | Generate Veyon Key
-  command: "veyon-cli authkeys create {{ veyon_key.name }}"
-  register: veyon_gen_key
-  ignore_errors: true
-  tags: veyon
+#- name: Localhost | Generate Veyon Key
+#  command: "veyon-cli authkeys create {{ veyon_key.name }}"
+#  register: veyon_gen_key
+#  ignore_errors: true
+#  tags: veyon
 
 - name: Localhost | SetAccessGroup Veyon Key
   command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/public $USER && veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/private $USER"
