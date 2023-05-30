@@ -19,6 +19,7 @@
         - localhost
 
 - hosts: asir
+  gather_facts: false
   vars:
     ansible_become_pass: "{{ become_password }}"
   become: true
