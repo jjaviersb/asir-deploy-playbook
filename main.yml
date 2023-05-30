@@ -2,14 +2,15 @@
 - hosts: localhost
 #  gather_facts: false
   remote_user: jenkins
-  #vars:
-  #  ansible_become_pass: "{{ become_pass_local }}"
-  #become: true
   pre_tasks:
     - name: Localhost | Localhost Tasks
       import_tasks: tasks/localhost.yml
       tags:
         - localhost
+    
+    - name: prueba
+      shell: whoami
+      
   roles:
     - name: ssh_copy_id
       tags: 
