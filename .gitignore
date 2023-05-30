@@ -13,4 +13,3 @@ comandos.*
 **/.vscode
 .*
 ejecutar.sh*
-inventory/localnet.ini
