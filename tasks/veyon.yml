@@ -17,7 +17,7 @@
 
 - name: Veyon | Create Veyon Directory
   file:
-    path: "{{ veyon_directory_key }}"
+    path: "{{ veyon_key.dir }}"
     state: directory
 
 - name: Veyon | Copy Veyon Key
@@ -31,7 +31,7 @@
 - name: Veyon | Import Veyon Key
   shell: veyon-cli authkeys import "{{ veyon_key.name }}"/public ./"{{ veyon_key.key }}"
   args:
-    chdir: "{{ veyon_directory_key }}"
+    chdir: "{{ veyon_key.dir }}"
   ignore_errors: True
 
 - name: Veyon | Start Veyon Service

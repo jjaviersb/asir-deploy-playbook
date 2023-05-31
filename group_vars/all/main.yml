@@ -1,23 +1,29 @@
 ---
 ## General
 
+# User make the deploy - SSH User
 ansible_user: "{{ asir_root_user }}" 
 
+# Target hosts for deploy - 
 hosts_deploy:
   - 192.168.1.11
   - 192.168.1.23
 
-asir_user: alumno
-path_asir_home: "/home/{{ asir_user }}"
+# Privileged user for Target hosts
 asir_root_user: profesor
 
-# vars for ssh-copy-id role
+# Default user for Asir Deploy and Default path
+asir_user: alumno
+path_asir_home: "/home/{{ asir_user }}"
+
+# Vars for ssh-copy-id role
 hostnames: "{{ hosts_deploy }}"
 username: "{{ asir_root_user }}"
 password: "{{ become_password }}"
 ssh_public_key: "{{ ssh_key_path }}"
 #port: 22 --> default
 
+# Template for Dockerfile
 dockerfile_template: {src: templates/Dockerfile.bin.j2, dest: "{{ path_iawe_directory }}/Dockerfile"}
 # template_example: {src: templates/example.j2, dest: "{{ path_example }}/example.example"}
 

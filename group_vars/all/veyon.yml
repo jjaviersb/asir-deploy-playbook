@@ -1,9 +1,8 @@
 ---
 ## Veyon
 
-path_veyon: /etc/veyon
-
 veyon_options: {
+  path: /etc/veyon,
   url: https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb,
   path: "{{ path_asir_home }}/veyon.deb"
 }

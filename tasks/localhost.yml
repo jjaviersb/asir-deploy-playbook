@@ -1,14 +1,15 @@
 ---
+- name: Localhost | Create .ssh Directory if not exists
+  file:
+    path: "{{ ssh_key.dir }}"
+    state: directory
+    mode: 0700
+
 - name: Localhost | Generate SSH Key
-  user:
-    name: javiersb
-    generate_ssh_key: yes
-    ssh_key_file: /home/javiersb/.ssh/id_rsa
-    ssh_key_type: rsa
-    ssh_key_bits: 4096
-    ssh_key_passphrase: 12345
-    state: present
-    force: no
+  openssh_keypair:
+    path: "{{ ssh_key.path }}"
+    size: 3072
+    type: rsa
 
 # Need veyon installed
 
@@ -29,21 +30,15 @@
   tags: veyon
 
 - name: Localhost | Add Veyon location 
-  become: True
   command: veyon-cli networkobjects add location "{{ veyon_key.name }}"
   register: veyon_location_check
-  vars:
-    ansible_become_password: "{{ become_local }}"
   ignore_errors: true
   tags: veyon
 
 - name: Localhost | Add Veyon computers
-  become: True
   command: veyon-cli networkobjects add computer "asir{{ ansible_loop.index }}" "{{ item }}" "" "{{ veyon_key.name }}"
   loop: "{{ hosts_deploy }}"
   loop_control:
     extended: true
-  vars:
-    ansible_become_password: "{{ become_local }}"
   when: veyon_location_check.rc == 0
   tags: veyon
