@@ -4,6 +4,7 @@
     - name: Localhost | Localhost Tasks
       become: True
       vars:
+        ansible_user: "{{ local_user }}"
         ansible_become_pass: "{{ become_local }}"
       import_tasks: tasks/localhost.yml
       tags:
