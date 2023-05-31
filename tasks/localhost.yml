@@ -21,18 +21,15 @@
 
 - name: Localhost | Generate Veyon Key
   command: "veyon-cli authkeys create {{ veyon_key.name }}"
-  register: veyon_gen_key
   ignore_errors: true
   tags: veyon
 
 - name: Localhost | SetAccessGroup Veyon Key
   command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/public {{ local_user }} && veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/private {{ local_user }}"
-  when: veyon_gen_key.rc == 0
   tags: veyon
 
 - name: Localhost | Export Veyon Key
   command: "veyon-cli authkeys export {{ veyon_key.name }}/public {{ veyon_key.src }}"
-  when: veyon_gen_key.rc == 0
   tags: veyon
 
 - name: Localhost | Change Owner Veyon Key
