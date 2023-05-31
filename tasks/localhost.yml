@@ -12,6 +12,8 @@
     path: "{{ ssh_key.path }}"
     size: 3072
     type: rsa
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
     state: present
   ignore_errors: true
 
