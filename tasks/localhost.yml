@@ -35,6 +35,13 @@
   when: veyon_gen_key.rc == 0
   tags: veyon
 
+- name: Localhost | Change Owner Veyon Key
+  file:
+    path: "{{ veyon_key.src }}"
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+  tags: veyon
+
 - name: Localhost | Add Veyon location 
   command: veyon-cli networkobjects add location "{{ veyon_key.name }}"
   register: veyon_location_check
