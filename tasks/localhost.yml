@@ -3,6 +3,8 @@
   file:
     path: "{{ ssh_key.dir }}"
     state: directory
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
     mode: 0700
 
 - name: Localhost | Generate SSH Key
