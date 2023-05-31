@@ -4,7 +4,7 @@
     - name: Localhost | Localhost Tasks
       become: True
       vars:
-        ansible_become_pass: "{{ become_password }}"
+        ansible_become_pass: "{{ become_local }}"
       import_tasks: tasks/localhost.yml
       tags:
         - localhost
@@ -19,7 +19,7 @@
   become: true
 #  vars:
 #    ansible_become_password: "{{ become_password }}"
-  tasks:
+  pre_tasks:
     - name: Asir Deploy | Create Users
       import_tasks: tasks/users.yml
       tags: 
@@ -29,12 +29,7 @@
       import_tasks: tasks/install.yml
       tags:
         - install
-      
-    - name: Asir Deploy | VBox
-      import_tasks: tasks/vbox.yml
-      tags:
-        - vbox
-    
+
     - name: Asir Deploy | Docker
       import_tasks: tasks/docker.yml
       tags:
@@ -55,6 +50,12 @@
       tags:
         - veyon
     
-    #- name: Asir Deploy | Poweroff host/s
-    #  command: poweroff
-    #  ignore_errors: true
+    #- name: Asir Deploy | VBox
+    #  import_tasks: tasks/vbox.yml
+    #  tags:
+    #    - vbox
+
+  roles:
+    - name: vbox_role
+      tags:
+        - vbox

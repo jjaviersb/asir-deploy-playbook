@@ -78,7 +78,7 @@ asir_apt_packages:
   - lynx
   - wget
   # programs
-  - virtualbox
+  #- virtualbox
 
 asir_snap_packages:
   - mysql-workbench-community

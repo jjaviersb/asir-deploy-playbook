@@ -3,3 +3,5 @@ roles:
   - name: ssh_copy_id
     src: https://github.com/jjaviersb/ansible-ssh-copy-id
     #version
+  - name: vbox_role
+    src: https://github.com/jjaviersb/vbox_deploy_role
