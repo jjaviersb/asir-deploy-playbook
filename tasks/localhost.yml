@@ -24,8 +24,12 @@
   ignore_errors: true
   tags: veyon
 
-- name: Localhost | SetAccessGroup Veyon Key
-  command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/public {{ local_user }} && veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/private {{ local_user }}"
+- name: Localhost | SetAccessGroup Veyon Public Key
+  command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/public {{ local_user }}"
+  tags: veyon
+
+- name: Localhost | SetAccessGroup Veyon Private Key
+  command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/private {{ local_user }}"
   tags: veyon
 
 - name: Localhost | Export Veyon Key
