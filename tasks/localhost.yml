@@ -30,7 +30,7 @@
 
 - name: Localhost | Init Check Packages
   package_facts:
-    manage: auto
+    manager: auto
 
 - name: Localhost | Check If Veyon is installed
   debug:
