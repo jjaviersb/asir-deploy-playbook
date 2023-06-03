@@ -35,7 +35,7 @@
 - name: Localhost | Check If Veyon is installed
   debug:
     msg: "Veyon is installed"
-  when: 'veyon' in ansible_facts.packages
+  when: "'veyon' in ansible_facts.packages"
   register: veyon_check
 
 - name: Localhost | Generate Veyon Key
