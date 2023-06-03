@@ -48,7 +48,6 @@
 - name: IAWE | Run IAWE container
   docker_container:
     name: "{{ name_iawe_container }}"
-    state: present
     network_mode: "{{ name_iawe_network }}"
     detach: yes
     image: "{{ name_iawe_image }}"
