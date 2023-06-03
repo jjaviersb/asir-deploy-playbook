@@ -2,14 +2,13 @@ tests/playbook.retry
 tests/.cache
 __pycache__
 .pytest_cache
-.molecule
 .cache
 roles/
 *.iml
-.idea
 .project
 comandos.*
 **/.vscode
 .*
 ejecutar.sh*
+files/*.deb
 files/discord*
