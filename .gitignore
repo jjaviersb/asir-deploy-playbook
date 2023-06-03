@@ -1,4 +1,3 @@
- 
 tests/playbook.retry
 tests/.cache
 __pycache__
@@ -13,3 +12,4 @@ comandos.*
 **/.vscode
 .*
 ejecutar.sh*
+files/discord*
