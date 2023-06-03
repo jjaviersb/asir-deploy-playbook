@@ -1,20 +1,4 @@
 ---
-- name: Veyon | Download Veyon Package
-  become_user: "{{ asir_user }}"
-  get_url:
-    url: "{{ veyon_options.url }}"
-    dest: "{{ veyon_options.path }}"
-
-- name: Veyon | Install Veyon Package
-  apt:
-    deb: "{{ veyon_options.path }}"
-    state: present
-
-- name: Veyon | Delete Veyon Package
-  file:
-    path: "{{ veyon_options.path }}"
-    state: absent
-
 - name: Veyon | Create Veyon Directory
   file:
     path: "{{ veyon_key.dir }}"

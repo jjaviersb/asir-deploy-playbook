@@ -12,6 +12,7 @@
   roles:
     - name: ssh_copy_id
       tags: 
+        - ssh
         - ssh_copy_id
         - localhost
 

@@ -49,15 +49,15 @@ vm_linuxmint_options: {
   }
 
 # values vm kali
-#https://cdimage.kali.org/kali-2023.2/kali-linux-2023.2-virtualbox-amd64.7z oficial
-#https://sourceforge.net/projects/osboxes/files/v/vb/25-Kl-l-x/2022.3/64bit.7z/download
-#Username: osboxes
-#Password: osboxes.org
-#Guest Additions: Installed
-#Keyboard Layout: US (Qwerty)
+# https://cdimage.kali.org/kali-2023.2/kali-linux-2023.2-virtualbox-amd64.7z oficial
+# https://sourceforge.net/projects/osboxes/files/v/vb/25-Kl-l-x/2022.3/64bit.7z/download
+# Username: osboxes
+# Password: osboxes.org
+# Guest Additions: Installed
+# Keyboard Layout: US (Qwerty)
 
-#values vm metasploitable
+# Values vm metasploitable
 
-#https://download.vulnhub.com/metasploitable/metasploitable-linux-2.0.0.zip
-#unzip
-#Metasploitable2-Linux/Metasploitable.vmdk
+# https://download.vulnhub.com/metasploitable/metasploitable-linux-2.0.0.zip
+# unzip
+# Metasploitable2-Linux/Metasploitable.vmdk

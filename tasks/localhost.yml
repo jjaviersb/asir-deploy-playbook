@@ -6,6 +6,7 @@
     owner: "{{ local_user }}"
     group: "{{ local_user }}"
     mode: 0700
+  tags: ssh
 
 - name: Localhost | Generate SSH Key
   openssh_keypair:
@@ -16,37 +17,61 @@
     group: "{{ local_user }}"
     state: present
   ignore_errors: true
+  tags: ssh
+
+- name: Localhost | Insert/Edit ssh_config file
+  blockinfile:
+    name: /etc/ssh/ssh_config
+    block: |
+      StrictHostKeyChecking accept-new
+  tags: ssh
 
 # Need veyon installed
+
+- name: Localhost | Init Check Packages
+  package_facts:
+    manage: auto
+
+- name: Localhost | Check If Veyon is installed
+  debug:
+    msg: "Veyon is installed"
+  when: 'veyon' in ansible_facts.packages
+  register: veyon_check
 
 - name: Localhost | Generate Veyon Key
   command: "veyon-cli authkeys create {{ veyon_key.name }}"
   ignore_errors: true
+  when: veyon_check
   tags: veyon
 
 - name: Localhost | SetAccessGroup Veyon Public Key
   command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/public {{ local_user }}"
   tags: veyon
+  when: veyon_check
 
 - name: Localhost | SetAccessGroup Veyon Private Key
   command: "veyon-cli authkeys setaccessgroup {{ veyon_key.name }}/private {{ local_user }}"
   tags: veyon
+  when: veyon_check
 
 - name: Localhost | Export Veyon Key
   command: "veyon-cli authkeys export {{ veyon_key.name }}/public {{ veyon_key.src }}"
   tags: veyon
+  when: veyon_check
 
 - name: Localhost | Change Owner Veyon Key
   file:
     path: "{{ veyon_key.src }}"
     owner: "{{ local_user }}"
     group: "{{ local_user }}"
+  when: veyon_check
   tags: veyon
 
 - name: Localhost | Add Veyon location 
   command: veyon-cli networkobjects add location "{{ veyon_key.name }}"
   register: veyon_location_check
   ignore_errors: true
+  when: veyon_check
   tags: veyon
 
 - name: Localhost | Add Veyon computers

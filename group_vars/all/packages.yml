@@ -1,6 +1,6 @@
 ---
 
-## Packages
+## APT Packages
 
 asir_apt_packages:
   # general
@@ -80,7 +80,19 @@ asir_apt_packages:
   # programs
   #- virtualbox
 
+# SNAP Packages
 asir_snap_packages:
   - mysql-workbench-community
   - code
   - atom
+
+# Chrome Package
+chrome_deb_package: {name: chrome, url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb} #oficial
+
+# .deb Packages
+asir_deb_packages:
+  - "{{ veyon_deb_package }}"
+  - "{{ chrome_deb_package }}"
+
+asir_custom_packages:
+  - {name: discord, src: files/discord-0.0.27.deb}
