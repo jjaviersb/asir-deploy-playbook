@@ -9,7 +9,7 @@ local_user: javiersb
 
 # Target hosts for deploy - 
 hosts_deploy:
-  - 192.168.1.19
+  #- 192.168.1.19
   - 192.168.1.23
 
 # Privileged user for Target hosts
@@ -18,6 +18,11 @@ asir_root_user: profesor
 # Default user for Asir Deploy and Default path
 asir_user: alumno
 path_asir_home: "/home/{{ asir_user }}"
+
+#Custom users
+custom_users:
+  - {name: curso}
+  #- {name: example, password: "{{ example_password | password_hash('sha512') }}"}
 
 # Vars for ssh-copy-id role
 hostnames: "{{ hosts_deploy }}"

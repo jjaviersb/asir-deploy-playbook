@@ -18,8 +18,6 @@
 
 - hosts: asir
   become: true
-#  vars:
-#    ansible_become_password: "{{ become_password }}"
   pre_tasks:
     - name: Asir Deploy | Create Users
       import_tasks: tasks/users.yml
@@ -50,13 +48,12 @@
       import_tasks: tasks/veyon.yml
       tags:
         - veyon
-    
-    #- name: Asir Deploy | VBox
-    #  import_tasks: tasks/vbox.yml
-    #  tags:
-    #    - vbox
 
   roles:
     - name: vbox_role
       tags:
         - vbox
+  
+  post_tasks:
+    - name: Asir Deploy | Reboot
+      command: sleep 2 && reboot

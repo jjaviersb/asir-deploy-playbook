@@ -1,9 +1,4 @@
 ---
 
-## BBDD
-
-bbdd_name_container: fernandorodriguezmoron/mysql
-bbdd_tag_container: latest
-bbdd_image_container: "{{ bbdd_name_container }}:{{ bbdd_tag_container }}"
-
-bbdd_vm_name: bbdd_ubuntuserver
+# MySQL container - Fernando
+db_container: {name: mysql-fernando, repo_container: fernandorodriguezmoron/mysql, image: fernandorodriguezmoron/mysql:latest, ports: 3306:3306}

@@ -24,18 +24,16 @@
 - name: IAWE | Run MySQL container
   docker_container:
     name: "{{ name_iawe_db }}"
-    state: present
     network_mode: "{{ name_iawe_network }}"
     detach: yes
     env:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: "{{ env_pass }}"
     image: mysql
     container_default_behavior: no_defaults
 
 - name: IAWE | Run PhpMyAdmin container
   docker_container:
     name: phpmyadmin
-    state: present
     network_mode: "{{ name_iawe_network }}"
     detach: yes
     env:
