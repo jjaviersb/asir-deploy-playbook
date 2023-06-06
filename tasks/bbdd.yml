@@ -1,5 +1,4 @@
 ---
-
 - name: BBDD | Pull MySQL Docker image
   docker_image:
     name: "{{ db_container.repo_container }}"

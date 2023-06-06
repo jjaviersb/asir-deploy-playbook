@@ -1,11 +1,10 @@
 ---
-
 - name: Users | Check if user "{{ asir_root_user }}" exists
   ignore_errors: true
   command: id "{{ asir_root_user }}"
   register: result_asir_root_user
 
-- name: "Users |Create user {{ asir_root_user }}"
+- name: "Users | Create user {{ asir_root_user }}"
   user:
     name: "{{ asir_root_user }}"
     groups: "sudo, {{ asir_root_user }}"
@@ -21,7 +20,7 @@
   ignore_errors: true
   register: result_asir_user
 
-- name: "Users |Create user {{ asir_user }}"
+- name: "Users | Create user {{ asir_user }}"
   user:
     name: "{{ asir_user }}"
     password: "{{ password_user | password_hash('sha512') }}"

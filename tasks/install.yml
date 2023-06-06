@@ -4,17 +4,17 @@
   apt:
     update_cache: yes
 
-# Task for Remove lock file for snap installer
-- name: Install Packages | Remove lock file SNAP 
-  file:
-    path: /etc/apt/preferences.d/nosnap.pref
-    state: absent
-
 # Task for install APT packages
 - name: Install Packages | Install APT packages
   apt:
     name: "{{ asir_apt_packages }}"
     state: present
+
+# Task for Remove lock file for snap installer
+- name: Install Packages | Remove lock file SNAP 
+  file:
+    path: /etc/apt/preferences.d/nosnap.pref
+    state: absent
 
 # Task for install SNAP packages
 - name: Install Packages | Install SNAP packages
@@ -33,14 +33,14 @@
   loop: "{{ asir_deb_packages }}"
   when: asir_deb_packages is defined
 
-- name: Veyon | Install .deb Packages
+- name: Install Packages | Install .deb Packages
   apt:
     deb: "{{ path_asir_home }}/{{ item.name }}.deb"
     state: present
   loop: "{{ asir_deb_packages }}"
   when: asir_deb_packages is defined
 
-- name: Veyon | Delete .deb Packages
+- name: Install Packages | Delete .deb Packages
   file:
     path: "{{ path_asir_home }}/{{ item.name }}.deb"
     state: absent
@@ -55,14 +55,14 @@
   loop: "{{ asir_custom_packages }}"
   when: asir_custom_packages is defined
 
-- name: Veyon | Install .deb Packages
+- name: Install Packages | Install custom .deb Packages
   apt:
     deb: "{{ path_asir_home }}/{{ item.name }}.deb"
     state: present
   loop: "{{ asir_custom_packages }}"
   when: asir_custom_packages is defined
 
-- name: Veyon | Delete .deb Packages
+- name: Install Packages | Delete custom .deb Packages
   file:
     path: "{{ path_asir_home }}/{{ item.name }}.deb"
     state: absent

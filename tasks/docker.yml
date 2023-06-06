@@ -1,5 +1,4 @@
 ---
-
 - name: Docker | Check if Docker GPG Key is already added
   stat:
     path: /usr/share/keyrings/docker.gpg
