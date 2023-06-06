@@ -38,6 +38,9 @@
   when: "'veyon' in ansible_facts.packages"
   register: veyon_check
 
+- name: Localhost | Change Authentication Mode
+  shell: veyon-cli config set Authentication/Method 1
+
 - name: Localhost | Generate Veyon Key
   command: "veyon-cli authkeys create {{ veyon_key.name }}"
   ignore_errors: true
