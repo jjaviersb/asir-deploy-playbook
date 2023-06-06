@@ -57,3 +57,4 @@
   post_tasks:
     - name: Asir Deploy | Reboot
       command: reboot
+      ignore_errors: true

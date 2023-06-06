@@ -10,7 +10,6 @@ local_user: javiersb
 # Target hosts for deploy - 
 hosts_deploy:
   -
-  -
 
 # Privileged user for Target hosts
 asir_root_user: profesor

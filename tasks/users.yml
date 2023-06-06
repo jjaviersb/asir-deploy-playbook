@@ -15,7 +15,7 @@
     shell: /bin/bash
   when: result_asir_root_user.rc != 0
 
-- name: Check if user {{ asir_user }} exists
+- name: "Users | Check if user {{ asir_user }} exists"
   command: id "{{ asir_user }}"
   ignore_errors: true
   register: result_asir_user
