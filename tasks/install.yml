@@ -4,17 +4,17 @@
   apt:
     update_cache: yes
 
-# Task for install APT packages
-- name: Install Packages | Install APT packages
-  apt:
-    name: "{{ asir_apt_packages }}"
-    state: present
-
 # Task for Remove lock file for snap installer
 - name: Install Packages | Remove lock file SNAP 
   file:
     path: /etc/apt/preferences.d/nosnap.pref
     state: absent
+
+# Task for install APT packages
+- name: Install Packages | Install APT packages
+  apt:
+    name: "{{ asir_apt_packages }}"
+    state: present
 
 # Task for install SNAP packages
 - name: Install Packages | Install SNAP packages

@@ -1,7 +1,6 @@
 ---
 
 ## APT Packages
-
 asir_apt_packages:
   # general
   - snapd
@@ -94,5 +93,5 @@ asir_deb_packages:
   - "{{ veyon_deb_package }}"
   - "{{ chrome_deb_package }}"
 
-asir_custom_packages:
-  - {name: discord, src: files/discord-0.0.27.deb}
+#asir_custom_packages:
+#  - {name: discord, src: files/discord-0.0.27.deb}

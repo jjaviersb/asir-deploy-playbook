@@ -9,8 +9,8 @@ local_user: javiersb
 
 # Target hosts for deploy - 
 hosts_deploy:
-  #- 192.168.1.19
-  - 192.168.1.23
+  -
+  -
 
 # Privileged user for Target hosts
 asir_root_user: profesor

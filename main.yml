@@ -56,4 +56,4 @@
   
   post_tasks:
     - name: Asir Deploy | Reboot
-      command: sleep 2 && reboot
+      command: sleep 2s && reboot
