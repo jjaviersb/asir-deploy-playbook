@@ -1,64 +1,60 @@
 ---
-- hosts: asir
-  vars:
-    ansible_become_pass: "{{ become_password }}"
-  tasks:
-    - name: Asir Deploy | Create Users
+- hosts: localhost
+  pre_tasks:
+    - name: Localhost | Localhost Tasks
       become: True
+      vars:
+        ansible_become_pass: "{{ become_local }}"
+      import_tasks: tasks/localhost.yml
+      tags:
+        - localhost
+
+  roles:
+    - name: ssh_copy_id
+      tags: 
+        - ssh
+        - ssh_copy_id
+        - localhost
+
+- hosts: asir
+  become: true
+  pre_tasks:
+    - name: Asir Deploy | Create Users
       import_tasks: tasks/users.yml
       tags: 
         - users
 
     - name: Asir Deploy | Install Packages
-      become: true 
       import_tasks: tasks/install.yml
       tags:
         - install
-    
-    - name: Asir Deploy | Create Directories
-      become: true
-      file:
-        path: "{{ item }}"
-        state: directory
-        owner: "{{ asir_user }}"
-        group: "{{ asir_user }}"
-        mode: 0755
-      loop: "{{ new_directories }}"
-    
-    - name: Asir Deploy | Copy Templates
-      become: true
-      template:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-      loop: "{{ templates }}"
-      
-    - name: Asir Deploy | VBox
-      become: true 
-      import_tasks: tasks/vbox.yml
-      tags:
-        - vbox
-    
+
     - name: Asir Deploy | Docker
-      become: true 
       import_tasks: tasks/docker.yml
       tags:
         - docker
 
-    - name: Asir Deploy | IAWE
-      become: true 
+    - name: Asir Deploy | IAWE 
       import_tasks: tasks/iawe.yml
       tags:
         - iawe
     
     - name: Asir Deploy | BBDD
-      become: true 
       import_tasks: tasks/bbdd.yml
       tags:
         - bbdd
 
     - name: Asir Deploy | Veyon
-      become: true 
       import_tasks: tasks/veyon.yml
       tags:
         - veyon
-    
+
+  roles:
+    - name: vbox_role
+      tags:
+        - vbox
+  
+  post_tasks:
+    - name: Asir Deploy | Reboot
+      command: reboot
+      ignore_errors: true

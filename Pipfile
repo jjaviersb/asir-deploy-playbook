@@ -5,10 +5,9 @@ name = "pypi"
 
 [packages]
 ansible = "*"
-molecule = "*"
 passlib = "*"
-virtualbox = "*"
 requests = "*"
+paramiko = "*"
 
 [dev-packages]
 

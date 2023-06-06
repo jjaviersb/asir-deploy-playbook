@@ -1,12 +1,26 @@
 ---
-
-- name: Check if user {{ asir_user }} exists
-  become: true
+- name: Users | Check if user "{{ asir_root_user }}" exists
   ignore_errors: true
+  command: id "{{ asir_root_user }}"
+  register: result_asir_root_user
+
+- name: "Users | Create user {{ asir_root_user }}"
+  user:
+    name: "{{ asir_root_user }}"
+    groups: "sudo, {{ asir_root_user }}"
+    append: yes
+    password: "{{ password_root_user | password_hash('sha512') }}"
+    state: present
+    createhome: yes
+    shell: /bin/bash
+  when: result_asir_root_user.rc != 0
+
+- name: "Users | Check if user {{ asir_user }} exists"
   command: id "{{ asir_user }}"
+  ignore_errors: true
   register: result_asir_user
 
-- name: "Create user {{ asir_user }}"
+- name: "Users | Create user {{ asir_user }}"
   user:
     name: "{{ asir_user }}"
     password: "{{ password_user | password_hash('sha512') }}"
@@ -15,19 +29,14 @@
     shell: /bin/bash
   when: result_asir_user.rc != 0
 
-- name: Check if user {{ asir_root_user }} exists
-  become: true
-  ignore_errors: true
-  command: id "{{ asir_root_user }}"
-  register: result_asir_root_user
-
-- name: "Create user {{ asir_root_user }}"
+- name: "Users | Create Custom users: {{ item }}"
   user:
-    name: "{{ asir_root_user }}"
-    groups: sudo
-    password: "{{ password_root_user | password_hash('sha512') }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password | default('') }}"
     state: present
     createhome: yes
     shell: /bin/bash
-  when: result_asir_root_user.rc != 0
+  loop: "{{ custom_users }}"
+  when: custom_users is defined
+
 

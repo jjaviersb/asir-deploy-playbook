@@ -1,18 +1,16 @@
 ---
-
 - name: BBDD | Pull MySQL Docker image
   docker_image:
-    name: "{{ bbdd_name_container }}"
-    repository: "{{ bbdd_image_container }}"
+    name: "{{ db_container.repo_container }}"
+    repository: "{{ db_container.image }}"
     source: pull
-    #tag: "{{ bbdd_tag_container }}"
 
-- name: BBDD | Init Container MySQL
+- name: BBDD | Init MySQL Container
   docker_container:
-    name: mysql-fernando
-    image: "{{ bbdd_image_container }}"
+    name: "{{ db_container.name }}"
+    image: "{{ db_container.image }}"
     ports:
-      - "3306:3306"
+      - "{{ db_container.ports }}"
     env:
-      MYSQL_ROOT_PASSWORD: root # it would be advisable to use an encrypted variable
+      MYSQL_ROOT_PASSWORD: "{{ env_pass }}"
     container_default_behavior: no_defaults

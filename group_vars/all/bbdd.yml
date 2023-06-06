@@ -1,0 +1,4 @@
+---
+
+# MySQL container - Fernando
+db_container: {name: mysql-fernando, repo_container: fernandorodriguezmoron/mysql, image: fernandorodriguezmoron/mysql:latest, ports: 3306:3306}

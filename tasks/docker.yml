@@ -1,5 +1,4 @@
 ---
-
 - name: Docker | Check if Docker GPG Key is already added
   stat:
     path: /usr/share/keyrings/docker.gpg
@@ -23,11 +22,9 @@
       - docker-compose
     state: present
 
-- name: Docker | Add User to Docker Group
+- name: Docker | Add Users to Docker Group
   user:
     name: "{{ item }}"
     groups: docker
     append: yes
-  loop:
-    - "{{ asir_user }}"
-    - "{{ asir_root_user }}"
+  loop: "{{ docker_users }}"

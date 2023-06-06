@@ -1,0 +1,7 @@
+---
+## Veyon
+
+veyon_deb_package: {
+  name: veyon,
+  url: https://github.com/veyon/veyon/releases/download/v4.8.0/veyon_4.8.0.0-ubuntu.jammy_amd64.deb,
+}

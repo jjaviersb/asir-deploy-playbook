@@ -1,0 +1,5 @@
+---
+# Users to use docker without sudo
+docker_users:
+  - "{{ asir_root_user }}"
+  - "{{ asir_user }}"
