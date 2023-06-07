@@ -12,3 +12,4 @@ comandos.*
 ejecutar.sh*
 files/*.deb
 files/discord*
+files/hosts.csv

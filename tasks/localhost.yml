@@ -71,17 +71,14 @@
   when: veyon_check
   tags: veyon
 
-- name: Localhost | Add Veyon location 
-  command: veyon-cli networkobjects add location "{{ veyon_key.name }}"
+- name: Localhost | Generate hosts.csv Veyon Location
+  template:
+    src: templates/hosts.csv.j2
+    dest: files/hosts.csv
   register: veyon_location_check
-  ignore_errors: true
-  when: veyon_check
   tags: veyon
 
-- name: Localhost | Add Veyon computers
-  command: veyon-cli networkobjects add computer "asir{{ ansible_loop.index }}" "{{ item }}" "" "{{ veyon_key.name }}"
-  loop: "{{ hosts_deploy }}"
-  loop_control:
-    extended: true
-  when: veyon_location_check.rc == 0
+- name: Localhost | Import Veyon location 
+  command: veyon-cli networkobjects import files/hosts.csv location "Asir" format "%name%;%host%;%mac%"
+  when: veyon_check
   tags: veyon
